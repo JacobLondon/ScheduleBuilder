@@ -1,0 +1,1 @@
+A schedule building program designed to build daily, weekly, or monthly schedules.
