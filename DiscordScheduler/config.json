@@ -1,0 +1,8 @@
+{
+  "token": "NDkzODIwMzY3MTU3MzI5OTQw.DqF3SQ.DT54WykI4iqKhPrVT1W78bTTI6Y",
+  "bot": {
+    "plugins": [
+      "plugins.bot"
+    ]
+  }
+}

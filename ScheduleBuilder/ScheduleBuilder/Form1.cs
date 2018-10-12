@@ -22,5 +22,10 @@ namespace ScheduleBuilder
             EventForm eventForm = new EventForm();
             eventForm.Show();
         }
+
+        private void MonthPrevButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
