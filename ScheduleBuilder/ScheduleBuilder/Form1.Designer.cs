@@ -90,22 +90,25 @@
             // 
             // DayDateTimePicker
             // 
-            this.DayDateTimePicker.Location = new System.Drawing.Point(6, 6);
+            this.DayDateTimePicker.Location = new System.Drawing.Point(531, 12);
             this.DayDateTimePicker.Name = "DayDateTimePicker";
             this.DayDateTimePicker.Size = new System.Drawing.Size(197, 20);
             this.DayDateTimePicker.TabIndex = 1;
             // 
             // DayDGV
             // 
+            this.DayDGV.AllowUserToAddRows = false;
+            this.DayDGV.AllowUserToDeleteRows = false;
+            this.DayDGV.AllowUserToResizeRows = false;
             this.DayDGV.BackgroundColor = System.Drawing.Color.White;
             this.DayDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DayDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.TimeColumn,
             this.EventColumn});
-            this.DayDGV.Location = new System.Drawing.Point(209, 6);
+            this.DayDGV.Location = new System.Drawing.Point(209, 58);
             this.DayDGV.Name = "DayDGV";
             this.DayDGV.RowHeadersVisible = false;
-            this.DayDGV.Size = new System.Drawing.Size(618, 517);
+            this.DayDGV.Size = new System.Drawing.Size(618, 465);
             this.DayDGV.TabIndex = 0;
             // 
             // TimeColumn
@@ -212,7 +215,6 @@
             // DayTabPage
             // 
             this.DayTabPage.Controls.Add(this.DayDGV);
-            this.DayTabPage.Controls.Add(this.DayDateTimePicker);
             this.DayTabPage.Location = new System.Drawing.Point(4, 22);
             this.DayTabPage.Name = "DayTabPage";
             this.DayTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -275,7 +277,7 @@
             // 
             this.WeekLabel.AutoSize = true;
             this.WeekLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WeekLabel.Location = new System.Drawing.Point(203, 11);
+            this.WeekLabel.Location = new System.Drawing.Point(306, 11);
             this.WeekLabel.Name = "WeekLabel";
             this.WeekLabel.Size = new System.Drawing.Size(170, 16);
             this.WeekLabel.TabIndex = 10;
@@ -345,7 +347,7 @@
             // 
             this.MonthLabel.AutoSize = true;
             this.MonthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MonthLabel.Location = new System.Drawing.Point(218, 8);
+            this.MonthLabel.Location = new System.Drawing.Point(308, 11);
             this.MonthLabel.Name = "MonthLabel";
             this.MonthLabel.Size = new System.Drawing.Size(170, 16);
             this.MonthLabel.TabIndex = 13;
@@ -376,6 +378,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1107, 597);
             this.Controls.Add(this.UserGroupBox);
+            this.Controls.Add(this.DayDateTimePicker);
             this.Controls.Add(this.CalendarTabControl);
             this.Controls.Add(this.NewEventButton);
             this.Controls.Add(this.UserComboBox);

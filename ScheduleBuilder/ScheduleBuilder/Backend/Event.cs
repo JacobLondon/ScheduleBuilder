@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ScheduleBuilder.Backend
 {
@@ -83,6 +84,15 @@ namespace ScheduleBuilder.Backend
             this.Location = Location;
             this.Priority = Priority;
             this.Description = Description;
+        }
+
+        public void FillDayDGV(ref DataGridView DayDGV)
+        {
+            //clear row
+            //add row
+            //get data from form 1
+            //repeat (as many times as necessary)
+            //sort data by time
         }
     }
 }

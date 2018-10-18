@@ -157,7 +157,6 @@ namespace ScheduleBuilder
         // update the currently selected user
         private void UserComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //MyList.IndexOf(MyList.Where(p => p.Name == "ComTruise").FirstOrDefault());
             string currentUsername = UserComboBox.Text;
             var temp = Users.Where(u => u.Username == currentUsername).FirstOrDefault();
             if (temp == null)
@@ -166,6 +165,7 @@ namespace ScheduleBuilder
                 return;
             }
             CurrentUser = temp;
+            
         }
 
         #endregion
