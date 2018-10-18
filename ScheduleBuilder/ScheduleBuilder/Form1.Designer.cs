@@ -40,7 +40,7 @@
             this.AddUserButton = new System.Windows.Forms.Button();
             this.UserDGV = new System.Windows.Forms.DataGridView();
             this.UserNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.UserComboBox = new System.Windows.Forms.ComboBox();
             this.NewEventButton = new System.Windows.Forms.Button();
             this.CalendarTabControl = new System.Windows.Forms.TabControl();
             this.DayTabPage = new System.Windows.Forms.TabPage();
@@ -143,6 +143,7 @@
             this.DeleteUserButton.TabIndex = 3;
             this.DeleteUserButton.Text = "Delete Selected User";
             this.DeleteUserButton.UseVisualStyleBackColor = true;
+            this.DeleteUserButton.Click += new System.EventHandler(this.DeleteUserButton_Click);
             // 
             // AddUserButton
             // 
@@ -152,14 +153,19 @@
             this.AddUserButton.TabIndex = 1;
             this.AddUserButton.Text = "Add User";
             this.AddUserButton.UseVisualStyleBackColor = true;
+            this.AddUserButton.Click += new System.EventHandler(this.AddUserButton_Click);
             // 
             // UserDGV
             // 
+            this.UserDGV.AllowUserToAddRows = false;
+            this.UserDGV.AllowUserToDeleteRows = false;
+            this.UserDGV.AllowUserToResizeRows = false;
             this.UserDGV.BackgroundColor = System.Drawing.Color.White;
             this.UserDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.UserDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.UserNameColumn});
             this.UserDGV.Location = new System.Drawing.Point(6, 82);
+            this.UserDGV.MultiSelect = false;
             this.UserDGV.Name = "UserDGV";
             this.UserDGV.RowHeadersVisible = false;
             this.UserDGV.Size = new System.Drawing.Size(242, 434);
@@ -171,14 +177,15 @@
             this.UserNameColumn.Name = "UserNameColumn";
             this.UserNameColumn.Width = 238;
             // 
-            // comboBox1
+            // UserComboBox
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(100, 6);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(242, 24);
-            this.comboBox1.TabIndex = 4;
+            this.UserComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UserComboBox.FormattingEnabled = true;
+            this.UserComboBox.Location = new System.Drawing.Point(100, 6);
+            this.UserComboBox.Name = "UserComboBox";
+            this.UserComboBox.Size = new System.Drawing.Size(242, 24);
+            this.UserComboBox.TabIndex = 4;
+            this.UserComboBox.SelectedIndexChanged += new System.EventHandler(this.UserComboBox_SelectedIndexChanged);
             // 
             // NewEventButton
             // 
@@ -189,7 +196,7 @@
             this.NewEventButton.TabIndex = 5;
             this.NewEventButton.Text = "Create New Event";
             this.NewEventButton.UseVisualStyleBackColor = true;
-            this.NewEventButton.Click += new System.EventHandler(this.button1_Click);
+            this.NewEventButton.Click += new System.EventHandler(this.NewEventButton_Click);
             // 
             // CalendarTabControl
             // 
@@ -371,11 +378,12 @@
             this.Controls.Add(this.UserGroupBox);
             this.Controls.Add(this.CalendarTabControl);
             this.Controls.Add(this.NewEventButton);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.UserComboBox);
             this.Controls.Add(this.UserLabel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Schedule Builder";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DayDGV)).EndInit();
             this.UserGroupBox.ResumeLayout(false);
             this.UserGroupBox.PerformLayout();
@@ -398,7 +406,7 @@
         private System.Windows.Forms.TextBox AddUserTextBox;
         private System.Windows.Forms.Label UserLabel;
         private System.Windows.Forms.GroupBox UserGroupBox;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox UserComboBox;
         private System.Windows.Forms.Button AddUserButton;
         private System.Windows.Forms.DataGridView UserDGV;
         private System.Windows.Forms.DataGridViewTextBoxColumn UserNameColumn;

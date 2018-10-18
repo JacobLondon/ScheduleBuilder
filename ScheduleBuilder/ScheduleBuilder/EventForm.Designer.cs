@@ -28,34 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.FinishDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.SubjectLabel = new System.Windows.Forms.Label();
             this.StartLabel = new System.Windows.Forms.Label();
             this.DescriptionLabel = new System.Windows.Forms.Label();
             this.DescriptionTextBox = new System.Windows.Forms.TextBox();
             this.LocationLabel = new System.Windows.Forms.Label();
             this.LocationTextBox = new System.Windows.Forms.TextBox();
-            this.TitleTextBox = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.SubjectTextBox = new System.Windows.Forms.TextBox();
+            this.StartTimeComboBox = new System.Windows.Forms.ComboBox();
+            this.FinishTimeComboBox = new System.Windows.Forms.ComboBox();
             this.FinishLabel = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.StartDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.RepeatCheckBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.RepeatOccurrencesComboBox = new System.Windows.Forms.ComboBox();
+            this.PriorityComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.AddUserButton = new System.Windows.Forms.Button();
+            this.AllDayCheckBox = new System.Windows.Forms.CheckBox();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // dateTimePicker1
+            // FinishDateTimePicker
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(77, 64);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(262, 22);
-            this.dateTimePicker1.TabIndex = 0;
+            this.FinishDateTimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FinishDateTimePicker.Location = new System.Drawing.Point(77, 64);
+            this.FinishDateTimePicker.Name = "FinishDateTimePicker";
+            this.FinishDateTimePicker.Size = new System.Drawing.Size(262, 22);
+            this.FinishDateTimePicker.TabIndex = 0;
             // 
             // SubjectLabel
             // 
@@ -115,31 +115,31 @@
             this.LocationTextBox.Size = new System.Drawing.Size(262, 22);
             this.LocationTextBox.TabIndex = 8;
             // 
-            // TitleTextBox
+            // SubjectTextBox
             // 
-            this.TitleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TitleTextBox.Location = new System.Drawing.Point(77, 6);
-            this.TitleTextBox.Name = "TitleTextBox";
-            this.TitleTextBox.Size = new System.Drawing.Size(262, 22);
-            this.TitleTextBox.TabIndex = 12;
+            this.SubjectTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SubjectTextBox.Location = new System.Drawing.Point(77, 6);
+            this.SubjectTextBox.Name = "SubjectTextBox";
+            this.SubjectTextBox.Size = new System.Drawing.Size(262, 22);
+            this.SubjectTextBox.TabIndex = 12;
             // 
-            // comboBox1
+            // StartTimeComboBox
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(348, 34);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
-            this.comboBox1.TabIndex = 13;
+            this.StartTimeComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StartTimeComboBox.FormattingEnabled = true;
+            this.StartTimeComboBox.Location = new System.Drawing.Point(348, 34);
+            this.StartTimeComboBox.Name = "StartTimeComboBox";
+            this.StartTimeComboBox.Size = new System.Drawing.Size(121, 24);
+            this.StartTimeComboBox.TabIndex = 13;
             // 
-            // comboBox2
+            // FinishTimeComboBox
             // 
-            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(348, 66);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 24);
-            this.comboBox2.TabIndex = 15;
+            this.FinishTimeComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FinishTimeComboBox.FormattingEnabled = true;
+            this.FinishTimeComboBox.Location = new System.Drawing.Point(348, 66);
+            this.FinishTimeComboBox.Name = "FinishTimeComboBox";
+            this.FinishTimeComboBox.Size = new System.Drawing.Size(121, 24);
+            this.FinishTimeComboBox.TabIndex = 15;
             // 
             // FinishLabel
             // 
@@ -151,24 +151,24 @@
             this.FinishLabel.TabIndex = 14;
             this.FinishLabel.Text = "Finish";
             // 
-            // dateTimePicker2
+            // StartDateTimePicker
             // 
-            this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Location = new System.Drawing.Point(77, 34);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(262, 22);
-            this.dateTimePicker2.TabIndex = 16;
+            this.StartDateTimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StartDateTimePicker.Location = new System.Drawing.Point(77, 34);
+            this.StartDateTimePicker.Name = "StartDateTimePicker";
+            this.StartDateTimePicker.Size = new System.Drawing.Size(262, 22);
+            this.StartDateTimePicker.TabIndex = 16;
             // 
-            // checkBox1
+            // RepeatCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(189, 98);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(110, 20);
-            this.checkBox1.TabIndex = 17;
-            this.checkBox1.Text = "Event repeats";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.RepeatCheckBox.AutoSize = true;
+            this.RepeatCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RepeatCheckBox.Location = new System.Drawing.Point(189, 98);
+            this.RepeatCheckBox.Name = "RepeatCheckBox";
+            this.RepeatCheckBox.Size = new System.Drawing.Size(110, 20);
+            this.RepeatCheckBox.TabIndex = 17;
+            this.RepeatCheckBox.Text = "Event repeats";
+            this.RepeatCheckBox.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -180,23 +180,23 @@
             this.label1.TabIndex = 18;
             this.label1.Text = "every";
             // 
-            // comboBox3
+            // RepeatOccurrencesComboBox
             // 
-            this.comboBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(348, 96);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 24);
-            this.comboBox3.TabIndex = 19;
+            this.RepeatOccurrencesComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RepeatOccurrencesComboBox.FormattingEnabled = true;
+            this.RepeatOccurrencesComboBox.Location = new System.Drawing.Point(348, 96);
+            this.RepeatOccurrencesComboBox.Name = "RepeatOccurrencesComboBox";
+            this.RepeatOccurrencesComboBox.Size = new System.Drawing.Size(121, 24);
+            this.RepeatOccurrencesComboBox.TabIndex = 19;
             // 
-            // comboBox4
+            // PriorityComboBox
             // 
-            this.comboBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(77, 156);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(121, 24);
-            this.comboBox4.TabIndex = 21;
+            this.PriorityComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PriorityComboBox.FormattingEnabled = true;
+            this.PriorityComboBox.Location = new System.Drawing.Point(77, 156);
+            this.PriorityComboBox.Name = "PriorityComboBox";
+            this.PriorityComboBox.Size = new System.Drawing.Size(121, 24);
+            this.PriorityComboBox.TabIndex = 21;
             // 
             // label2
             // 
@@ -208,51 +208,52 @@
             this.label2.TabIndex = 20;
             this.label2.Text = "Priority";
             // 
-            // checkBox2
+            // AllDayCheckBox
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox2.Location = new System.Drawing.Point(348, 8);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(69, 20);
-            this.checkBox2.TabIndex = 22;
-            this.checkBox2.Text = "All-day";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.AllDayCheckBox.AutoSize = true;
+            this.AllDayCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AllDayCheckBox.Location = new System.Drawing.Point(348, 8);
+            this.AllDayCheckBox.Name = "AllDayCheckBox";
+            this.AllDayCheckBox.Size = new System.Drawing.Size(69, 20);
+            this.AllDayCheckBox.TabIndex = 22;
+            this.AllDayCheckBox.Text = "All-day";
+            this.AllDayCheckBox.UseVisualStyleBackColor = true;
             // 
-            // AddUserButton
+            // SaveButton
             // 
-            this.AddUserButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddUserButton.Location = new System.Drawing.Point(12, 450);
-            this.AddUserButton.Name = "AddUserButton";
-            this.AddUserButton.Size = new System.Drawing.Size(457, 27);
-            this.AddUserButton.TabIndex = 23;
-            this.AddUserButton.Text = "Save Event";
-            this.AddUserButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SaveButton.Location = new System.Drawing.Point(12, 450);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(457, 27);
+            this.SaveButton.TabIndex = 23;
+            this.SaveButton.Text = "Save Event";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // EventForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(472, 482);
-            this.Controls.Add(this.AddUserButton);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.comboBox4);
+            this.Controls.Add(this.SaveButton);
+            this.Controls.Add(this.AllDayCheckBox);
+            this.Controls.Add(this.PriorityComboBox);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.RepeatOccurrencesComboBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.RepeatCheckBox);
+            this.Controls.Add(this.StartDateTimePicker);
+            this.Controls.Add(this.FinishTimeComboBox);
             this.Controls.Add(this.FinishLabel);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.TitleTextBox);
+            this.Controls.Add(this.StartTimeComboBox);
+            this.Controls.Add(this.SubjectTextBox);
             this.Controls.Add(this.LocationTextBox);
             this.Controls.Add(this.LocationLabel);
             this.Controls.Add(this.DescriptionTextBox);
             this.Controls.Add(this.DescriptionLabel);
             this.Controls.Add(this.StartLabel);
             this.Controls.Add(this.SubjectLabel);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.FinishDateTimePicker);
             this.Name = "EventForm";
             this.Text = "Event Builder";
             this.ResumeLayout(false);
@@ -262,24 +263,24 @@
 
         #endregion
 
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker FinishDateTimePicker;
         private System.Windows.Forms.Label SubjectLabel;
         private System.Windows.Forms.Label StartLabel;
         private System.Windows.Forms.Label DescriptionLabel;
         private System.Windows.Forms.TextBox DescriptionTextBox;
         private System.Windows.Forms.Label LocationLabel;
         private System.Windows.Forms.TextBox LocationTextBox;
-        private System.Windows.Forms.TextBox TitleTextBox;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TextBox SubjectTextBox;
+        private System.Windows.Forms.ComboBox StartTimeComboBox;
+        private System.Windows.Forms.ComboBox FinishTimeComboBox;
         private System.Windows.Forms.Label FinishLabel;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.DateTimePicker StartDateTimePicker;
+        private System.Windows.Forms.CheckBox RepeatCheckBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox RepeatOccurrencesComboBox;
+        private System.Windows.Forms.ComboBox PriorityComboBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.Button AddUserButton;
+        private System.Windows.Forms.CheckBox AllDayCheckBox;
+        private System.Windows.Forms.Button SaveButton;
     }
 }

@@ -78,6 +78,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backend\Constants.cs" />
+    <Compile Include="Backend\Event.cs" />
+    <Compile Include="Backend\User.cs" />
     <Compile Include="EventForm.cs">
       <SubType>Form</SubType>
     </Compile>
