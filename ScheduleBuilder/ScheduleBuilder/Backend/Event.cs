@@ -14,9 +14,9 @@ namespace ScheduleBuilder.Backend
         public bool AllDay { get; set; }
 
         public DateTime StartDate { get; set; }
-        public string StartTime { get; set; }
+        public DateTime StartTime { get; set; }
         public DateTime FinishDate { get; set; }
-        public string FinishTime { get; set; }
+        public DateTime FinishTime { get; set; }
 
         public bool EventRepeats { get; set; }
         public string RepeatOccurence { get; set; }
@@ -29,9 +29,9 @@ namespace ScheduleBuilder.Backend
             bool AllDay,
 
             DateTime StartDate,
-            string StartTime,
+            DateTime StartTime,
             DateTime FinishDate,
-            string FinishTime,
+            DateTime FinishTime,
             
             bool EventRepeats,
             string RepeatOccurence,
@@ -41,9 +41,9 @@ namespace ScheduleBuilder.Backend
         {
             this.Subject = Subject;
             this.AllDay = AllDay;
-
-            this.StartDate = Convert.ToDateTime(StartDate + " " + StartTime);
-            this.FinishDate = Convert.ToDateTime(FinishDate + " " + FinishTime);
+            
+            this.StartDate = StartDate.Date + StartTime.TimeOfDay;
+            this.FinishDate = FinishDate.Date + FinishTime.TimeOfDay;
 
             this.EventRepeats = EventRepeats;
             this.RepeatOccurence = RepeatOccurence;
@@ -56,34 +56,6 @@ namespace ScheduleBuilder.Backend
         public Event()
         {
 
-        }
-
-        public void FillEvent(
-            string Subject,
-            bool AllDay,
-
-            DateTime StartDate,
-            string StartTime,
-            DateTime FinishDate,
-            string FinishTime,
-
-            bool EventRepeats,
-            string RepeatOccurence,
-            string Location,
-            string Priority,
-            string Description)
-        {
-            this.Subject = Subject;
-            this.AllDay = AllDay;
-
-            this.StartDate = Convert.ToDateTime(StartDate + " " + StartTime);
-            this.FinishDate = Convert.ToDateTime(FinishDate + " " + FinishTime);
-
-            this.EventRepeats = EventRepeats;
-            this.RepeatOccurence = RepeatOccurence;
-            this.Location = Location;
-            this.Priority = Priority;
-            this.Description = Description;
         }
 
         public void FillDayDGV(ref DataGridView DayDGV)

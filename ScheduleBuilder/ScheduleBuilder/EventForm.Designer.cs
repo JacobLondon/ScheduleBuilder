@@ -125,6 +125,7 @@
             // 
             // StartTimeComboBox
             // 
+            this.StartTimeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.StartTimeComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StartTimeComboBox.FormattingEnabled = true;
             this.StartTimeComboBox.Location = new System.Drawing.Point(348, 34);
@@ -134,6 +135,7 @@
             // 
             // FinishTimeComboBox
             // 
+            this.FinishTimeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.FinishTimeComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FinishTimeComboBox.FormattingEnabled = true;
             this.FinishTimeComboBox.Location = new System.Drawing.Point(348, 66);
@@ -182,6 +184,7 @@
             // 
             // RepeatOccurrencesComboBox
             // 
+            this.RepeatOccurrencesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.RepeatOccurrencesComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RepeatOccurrencesComboBox.FormattingEnabled = true;
             this.RepeatOccurrencesComboBox.Location = new System.Drawing.Point(348, 96);
@@ -256,6 +259,7 @@
             this.Controls.Add(this.FinishDateTimePicker);
             this.Name = "EventForm";
             this.Text = "Event Builder";
+            this.Load += new System.EventHandler(this.EventForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -22,6 +22,25 @@ namespace ScheduleBuilder
 
         }
 
+        // on form load
+        private void EventForm_Load(object sender, EventArgs e)
+        {
+            // fill comboboxes with data
+            TimeSpan builder = new TimeSpan();
+
+            // traverse for all times of the day
+            for(int i = 0; i < 24; i++)
+            {
+                builder = new TimeSpan(i, 0, 0);
+                StartTimeComboBox.Items.Add(builder);
+                FinishTimeComboBox.Items.Add(builder);
+            }
+
+            StartTimeComboBox.SelectedIndex = 12;
+            FinishTimeComboBox.SelectedIndex = 13;
+
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -29,13 +48,13 @@ namespace ScheduleBuilder
         /// <param name="e"></param>
         private void SaveButton_Click(object sender, EventArgs e)
         {
-           Backend.Event temp = new Backend.Event(
+            Backend.Event temp = new Backend.Event(
                 SubjectTextBox.Text,
                 AllDayCheckBox.Checked,
-                StartDateTimePicker.Value,
-                StartTimeComboBox.Text,
-                FinishDateTimePicker.Value,
-                FinishTimeComboBox.Text,
+                StartDateTimePicker.Value.Date,
+                DateTime.Parse(StartTimeComboBox.SelectedItem.ToString()),
+                FinishDateTimePicker.Value.Date,
+                DateTime.Parse(FinishTimeComboBox.SelectedItem.ToString()),
                 RepeatCheckBox.Checked,
                 RepeatOccurrencesComboBox.Text,
                 LocationTextBox.Text,
@@ -45,5 +64,6 @@ namespace ScheduleBuilder
             MainForm.CreateEvent(temp);
             Close();
         }
+
     }
 }
