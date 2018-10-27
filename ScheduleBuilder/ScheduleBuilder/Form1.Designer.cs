@@ -196,6 +196,7 @@
             // 
             // UserComboBox
             // 
+            this.UserComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.UserComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UserComboBox.FormattingEnabled = true;
             this.UserComboBox.Location = new System.Drawing.Point(100, 6);
@@ -359,6 +360,7 @@
             this.WeekNextButton.TabIndex = 9;
             this.WeekNextButton.Text = ">>>";
             this.WeekNextButton.UseVisualStyleBackColor = true;
+            this.WeekNextButton.Click += new System.EventHandler(this.WeekNextButton_Click);
             // 
             // WeekPrevButton
             // 
@@ -368,6 +370,7 @@
             this.WeekPrevButton.TabIndex = 8;
             this.WeekPrevButton.Text = "<<<";
             this.WeekPrevButton.UseVisualStyleBackColor = true;
+            this.WeekPrevButton.Click += new System.EventHandler(this.WeekPrevButton_Click);
             // 
             // MonthTabPage
             // 
@@ -472,6 +475,7 @@
             this.MonthNextButton.TabIndex = 12;
             this.MonthNextButton.Text = ">>>";
             this.MonthNextButton.UseVisualStyleBackColor = true;
+            this.MonthNextButton.Click += new System.EventHandler(this.MonthNextButton_Click);
             // 
             // MonthPrevButton
             // 

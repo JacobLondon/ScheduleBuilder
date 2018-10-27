@@ -38,7 +38,19 @@ namespace ScheduleBuilder
 
             StartTimeComboBox.SelectedIndex = 12;
             FinishTimeComboBox.SelectedIndex = 13;
+            SubjectTextBox.Text = "Subject";
 
+            foreach(string s in Backend.Constants.RepeatList)
+            {
+                RepeatOccurrencesComboBox.Items.Add(s);
+            }
+            RepeatOccurrencesComboBox.SelectedIndex = 0;
+
+            foreach (string s in Backend.Constants.PriorityList)
+            {
+                PriorityComboBox.Items.Add(s);
+            }
+            PriorityComboBox.SelectedIndex = 0;
         }
 
         /// <summary>
