@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
 namespace ScheduleBuilder
@@ -32,16 +34,18 @@ namespace ScheduleBuilder
         {
             DayLabel.Text = DayDateTimePicker.Value.ToShortDateString();
 
-            if (Users.Count() <= 0)
-                MessageBox.Show(
-                    "There are no users in the program. Please add one before continuing.",
-                    "Warning",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+            //if (Users.Count() <= 0)
+            //    MessageBox.Show(
+            //        "There are no users in the program. Please add one before continuing.",
+            //        "Warning",
+            //        MessageBoxButtons.OK,
+            //        MessageBoxIcon.Warning);
 
             // Daniel Added label update for initial load
             int dow = Convert.ToInt32(DayDateTimePicker.Value.DayOfWeek);
-            WeekLabel.Text = "Week of " + DayDateTimePicker.Value.AddDays(-1 * dow).ToShortDateString() + " through " + DayDateTimePicker.Value.AddDays(7 % dow - 1).ToShortDateString();
+            WeekLabel.Text = "Week of "
+                + DayDateTimePicker.Value.AddDays(-1 * dow).ToShortDateString()
+                + " through " + DayDateTimePicker.Value.AddDays(6 - dow).ToShortDateString();
 
             /*
             // Daniel Created Row and Time Loading for WeekDGV
@@ -53,9 +57,26 @@ namespace ScheduleBuilder
                 WeekDGV.Rows.Add(row);
             }
             */
-            UpdateInterface();
+
             // Daniel Added update to weekTemp variable.
             //weekTemp = DayDateTimePicker.Value;
+
+            // check if the save location exists
+            if (!Directory.Exists(Backend.Constants.SAVE_DIRECTORY))
+            {
+                Directory.CreateDirectory(Backend.Constants.SAVE_DIRECTORY);
+            }
+
+            // try to deserialize all files to users
+            foreach (var file in Directory.EnumerateFiles(Backend.Constants.SAVE_DIRECTORY, "*.json"))
+            {
+                Console.WriteLine(file);
+                var user = new JavaScriptSerializer().Deserialize<Backend.User>(File.ReadAllText(file));
+                Users.Add(user);
+            }
+
+            UpdateUserComboBox();
+            UpdateInterface();
         }
 
         private void InitializeVariables()
@@ -87,6 +108,25 @@ namespace ScheduleBuilder
             // MADE BY DAVID
             LoadMonthDGV();
             MonthLabelUpdate(DayDateTimePicker.Value.Month);
+
+            JSONSerialize();
+        }
+
+        public void JSONSerialize()
+        {
+            // serialize each user into a different file
+            foreach(Backend.User u in Users)
+            {
+                // make a string in json format of the current user
+                var json = new JavaScriptSerializer().Serialize(u);
+
+                // write or overwrite data in the file
+                //using (var tw = new StreamWriter(Backend.Constants.SAVE_DIRECTORY + "\\" + u.Username + ".json", true))
+                //{
+                //    tw.wri(json);
+                //}
+                File.WriteAllText(Backend.Constants.SAVE_DIRECTORY + "\\" + u.Username + ".json", json);
+            }
         }
 
         #region Main Window
@@ -149,8 +189,11 @@ namespace ScheduleBuilder
             // if the item was found in the list
             if (index != -1)
             {
+                // remove the save file
+                File.Delete(Backend.Constants.SAVE_DIRECTORY + "\\" + Users[index].Username + ".json");
+
                 Users.RemoveAt(index);
-                UpdateUserComboBox(); // update the user combobox
+                UpdateUserComboBox(); // update the user combobox to remove the user
                 UpdateInterface();
             }
         }

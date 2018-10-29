@@ -29,6 +29,8 @@ namespace ScheduleBuilder.Backend
             "Yearly"
         };
 
+        public static string SAVE_DIRECTORY = "C:\\Users\\" + Environment.UserName + "\\ScheduleBuilder";
+
         public static Color HIGH_PRIORITY = Color.Red;
         public static Color MED_PRIORITY = Color.Orange;
         public static Color LOW_PRIORITY = Color.Yellow;
