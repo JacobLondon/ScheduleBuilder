@@ -1,4 +1,7 @@
 from disco.bot import Bot, Plugin
+from .data import get_user_data
+
+magic_string = '-' * 32
 
 """
 Disco github: https://github.com/b1naryth1ef/disco
@@ -20,3 +23,15 @@ class SimplePlugin(Plugin):
     @Plugin.command('echo', '<content:str...>')
     def on_echo_command(self, event, content):
         event.msg.reply(content)
+
+    # Get the events for the current user
+    @Plugin.command('events', '<content:str...>')
+    def on_events_command(self, event, content):
+        user = get_user_data(str(event.msg.author))
+
+        builder = magic_string + '\n'
+        for schedule_event in user.Events:
+            builder += f'Subject: {schedule_event.Subject}\nDescription: {schedule_event.Description}\n'
+            builder += magic_string + '\n'
+
+        event.msg.reply(builder)

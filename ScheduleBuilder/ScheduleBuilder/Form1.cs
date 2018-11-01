@@ -91,9 +91,7 @@ namespace ScheduleBuilder
         {
             AddUserTextBox.KeyDown += AddUserTextBox_KeyDown;
         }
-
         
-
         public void UpdateInterface()
         {
             // update the user dgv
@@ -121,10 +119,6 @@ namespace ScheduleBuilder
                 var json = new JavaScriptSerializer().Serialize(u);
 
                 // write or overwrite data in the file
-                //using (var tw = new StreamWriter(Backend.Constants.SAVE_DIRECTORY + "\\" + u.Username + ".json", true))
-                //{
-                //    tw.wri(json);
-                //}
                 File.WriteAllText(Backend.Constants.SAVE_DIRECTORY + "\\" + u.Username + ".json", json);
             }
         }
