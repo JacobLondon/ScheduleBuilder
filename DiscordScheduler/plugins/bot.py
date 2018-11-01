@@ -35,3 +35,8 @@ class SimplePlugin(Plugin):
             builder += magic_string + '\n'
 
         event.msg.reply(builder)
+
+    # Example
+    @Plugin.command('test', '<content:str...>')
+    def on_test_command(self, event, content):
+        event.msg.reply('received content: ' + content)

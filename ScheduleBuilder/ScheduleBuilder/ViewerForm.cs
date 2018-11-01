@@ -44,5 +44,10 @@ namespace ScheduleBuilder
             MainForm.DeleteEvent(UserEvent);
             Close();
         }
+
+        private void SubjectTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

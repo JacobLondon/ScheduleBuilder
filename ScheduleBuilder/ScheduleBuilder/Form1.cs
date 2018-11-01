@@ -32,7 +32,7 @@ namespace ScheduleBuilder
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            DayLabel.Text = DayDateTimePicker.Value.ToShortDateString();
+            EventLabel.Text = DayDateTimePicker.Value.ToShortDateString();
 
             //if (Users.Count() <= 0)
             //    MessageBox.Show(
@@ -98,7 +98,7 @@ namespace ScheduleBuilder
             UpdateUserDGV();
 
             // update the day datagridview with event items
-            FillDayDGV(ref DayDGV);
+            FillDayDGV(ref EventDGV);
 
             // Daniel Added FillWeekDGV to UpdateInterface
             FillWeekDGV(ref WeekDGV);
@@ -271,7 +271,7 @@ namespace ScheduleBuilder
         {
             // clear rows       
             DayDGV.Rows.Clear();
-            DayLabel.Text = DayDateTimePicker.Value.ToShortDateString();
+            EventLabel.Text = DayDateTimePicker.Value.ToShortDateString();
 
             // put event items in the day row
             foreach (Backend.Event item in CurrentUser.Events)

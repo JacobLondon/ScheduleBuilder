@@ -156,6 +156,7 @@
             this.SubjectTextBox.Name = "SubjectTextBox";
             this.SubjectTextBox.Size = new System.Drawing.Size(262, 22);
             this.SubjectTextBox.TabIndex = 31;
+            this.SubjectTextBox.TextChanged += new System.EventHandler(this.SubjectTextBox_TextChanged);
             // 
             // LocationTextBox
             // 
