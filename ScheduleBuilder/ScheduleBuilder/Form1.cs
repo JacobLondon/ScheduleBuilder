@@ -18,9 +18,6 @@ namespace ScheduleBuilder
 
         private Backend.User CurrentUser;
 
-        //Daniel Added DateTime variable for current WeekDay to handle Week arrows.
-        //DateTime weekTemp;
-
         public Form1()
         {
             InitializeComponent();
@@ -34,32 +31,11 @@ namespace ScheduleBuilder
         {
             EventLabel.Text = DayDateTimePicker.Value.ToShortDateString();
 
-            //if (Users.Count() <= 0)
-            //    MessageBox.Show(
-            //        "There are no users in the program. Please add one before continuing.",
-            //        "Warning",
-            //        MessageBoxButtons.OK,
-            //        MessageBoxIcon.Warning);
-
             // Daniel Added label update for initial load
             int dow = Convert.ToInt32(DayDateTimePicker.Value.DayOfWeek);
             WeekLabel.Text = "Week of "
                 + DayDateTimePicker.Value.AddDays(-1 * dow).ToShortDateString()
                 + " through " + DayDateTimePicker.Value.AddDays(6 - dow).ToShortDateString();
-
-            /*
-            // Daniel Created Row and Time Loading for WeekDGV
-            for (int i = 0; i < 24; i++)
-            {
-                DataGridViewRow row = new DataGridViewRow();
-                row.CreateCells(WeekDGV);
-                row.Cells[0].Value = new TimeSpan(i, 0, 0);
-                WeekDGV.Rows.Add(row);
-            }
-            */
-
-            // Daniel Added update to weekTemp variable.
-            //weekTemp = DayDateTimePicker.Value;
 
             // check if the save location exists
             if (!Directory.Exists(Backend.Constants.SAVE_DIRECTORY))
@@ -83,8 +59,6 @@ namespace ScheduleBuilder
         {
             Users = new List<Backend.User>();
             CurrentUser = new Backend.User();
-
-            //weekTemp = new DateTime();
         }
 
         private void InitializeEvents()
@@ -98,6 +72,7 @@ namespace ScheduleBuilder
             UpdateUserDGV();
 
             // update the day datagridview with event items
+            FillDayDGV(ref DayDGV);
             FillDayDGV(ref EventDGV);
 
             // Daniel Added FillWeekDGV to UpdateInterface
@@ -260,35 +235,108 @@ namespace ScheduleBuilder
         // the day selection was changed
         private void DayDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            // Daniel Added update to weekTemp variable on DayDateTimePicker change.
-            //weekTemp = DayDateTimePicker.Value;
-
             UpdateInterface();
         }
+
+        #endregion
+
+        #region DayTab
 
         // Alex Created FillDayDGV
         public void FillDayDGV(ref DataGridView DayDGV)
         {
             // clear rows       
             DayDGV.Rows.Clear();
+            DayLabel.Text = DayDateTimePicker.Value.ToShortDateString();
+            FillDGVWithTimes(ref DayDGV);
+            foreach (DataGridViewRow row in DayDGV.Rows)
+            {
+                foreach (Backend.Event item in CurrentUser.Events)
+                {
+                    if (item.StartDate.Date == DayDateTimePicker.Value.Date && row.Cells[0].Value.ToString() == item.StartDate.ToString("hh:mm tt"))
+                    {
+                        row.Cells[0].Value = item.StartDate.ToString("hh:mm tt");
+                        row.Cells[1].Value += item.Subject.ToString();
+                        if (item.Priority == "Low")
+                        //item.Priority == Backend.Constants.PriorityList[Backend.Constants.Priority.Low])
+                        {
+                            row.Cells[0].Style.BackColor = Backend.Constants.LOW_PRIORITY;
+                            row.Cells[1].Style.BackColor = Backend.Constants.LOW_PRIORITY;
+                        }
+                        else if (item.Priority == "Medium")
+                        {
+                            row.Cells[0].Style.BackColor = Backend.Constants.MED_PRIORITY;
+                            row.Cells[1].Style.BackColor = Backend.Constants.MED_PRIORITY;
+                        }
+                        else if (item.Priority == "High")
+                        {
+                            row.Cells[0].Style.BackColor = Backend.Constants.HIGH_PRIORITY;
+                            row.Cells[1].Style.BackColor = Backend.Constants.HIGH_PRIORITY;
+                        }
+                    }
+                }
+            }
+            DayDGV.Refresh();
+        }
+
+        //Alex - Fill Data Grid View with times 
+        public void FillDGVWithTimes(ref DataGridView DGV)
+        {
+            for (int i = 6; i < 24; i++)
+            {
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(DGV);
+                row.Cells[0].Value = new DateTime(DayDateTimePicker.Value.Year, DayDateTimePicker.Value.Month, DayDateTimePicker.Value.Day, i, 0, 0).ToString("hh:mm tt");
+                DGV.Rows.Add(row);
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(DGV);
+                row.Cells[0].Value = new DateTime(DayDateTimePicker.Value.Year, DayDateTimePicker.Value.Month, DayDateTimePicker.Value.Day, i, 0, 0).ToString("hh:mm tt");
+                DGV.Rows.Add(row);
+            }
+        }
+
+        // Alex Created FillEventDGV (useful for debugging)
+        public void FillEventDGV(ref DataGridView EventDGV)
+        {
+            // clear rows       
+            EventDGV.Rows.Clear();
             EventLabel.Text = DayDateTimePicker.Value.ToShortDateString();
 
-            // put event items in the day row
+            // put event items in the event rows
             foreach (Backend.Event item in CurrentUser.Events)
             {
                 DataGridViewRow StartRow = new DataGridViewRow();
-                StartRow.CreateCells(DayDGV);
+                StartRow.CreateCells(EventDGV);
                 StartRow.Cells[0].Value = item.StartDate.ToString("hh:mm tt");
                 StartRow.Cells[1].Value = item.Subject.ToString();
-                DayDGV.Rows.Add(StartRow);
+                EventDGV.Rows.Add(StartRow);
             }
-            DayDGV.Refresh();
+            EventDGV.Refresh();
+        }
+
+        //Alex -Update UserComboBox on index change in UserDGV
+        private void UserDGV_SelectionChanged(object sender, EventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            if (dgv != null && dgv.SelectedRows.Count > 0)
+            {
+                DataGridViewRow row = dgv.SelectedRows[0];
+                if (row != null)
+                {
+                    int a = UserDGV.SelectedRows[0].Cells[0].RowIndex;
+                    UserComboBox.SelectedIndex = a;
+                }
+            }
         }
 
         #endregion
 
         #region Week Tab
 
+        // Daniel1: Made minor changes to everything, just paste entire week section over...
         // Daniel Added WeekPrevButton Click Handler Function
         private void WeekPrevButton_Click(object sender, EventArgs e)
         {
@@ -305,11 +353,57 @@ namespace ScheduleBuilder
             UpdateInterface();
         }
 
+        // Daniel1 Added column click DayDateTimePicker change
+        private void WeekDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int dow = Convert.ToInt32(DayDateTimePicker.Value.DayOfWeek);
+            // Beginning of Week DateTime
+            DateTime bow = new DateTime();
+            bow = DayDateTimePicker.Value.AddDays(-1 * dow);
+            int c = WeekDGV.SelectedCells[0].ColumnIndex;
+
+            // Change DayDateTimePicker value
+            DayDateTimePicker.Value = bow.AddDays(c - 1);
+
+            // Highlight Selected Column
+            //for (int r = 0; r < 24; r++)
+            //{
+            //    WeekDGV.Rows[r].Cells[c].Style.BackColor = Color.LightBlue;
+            //}
+
+            // try this?
+            //WeekDGV.Columns[c].Selected = true;
+
+            // Fill Cells
+            //foreach (Backend.Event item in CurrentUser.Events)
+            //{
+            //    FillWeekCell((int)item.StartTime.Hour, item);
+            //}
+
+        }
+
         // Daniel Created FillWeekDGV
         public void FillWeekDGV(ref DataGridView WeekDGV)
         {
+            int dow = Convert.ToInt32(DayDateTimePicker.Value.DayOfWeek);
+            // End of Week DateTime
+            DateTime eow = new DateTime();
+            eow = DayDateTimePicker.Value.AddDays(6 - dow);
+            // Beginning of Week DateTime
+            DateTime bow = new DateTime();
+            bow = DayDateTimePicker.Value.AddDays(-1 * dow);
+
             // Clear Rows
             WeekDGV.Rows.Clear();
+
+            // Daniel1 Update Day Number on columns
+            WeekDGV.Columns[1].HeaderText = "Sunday " + bow.AddDays(0).Day;
+            WeekDGV.Columns[2].HeaderText = "Monday " + bow.AddDays(1).Day;
+            WeekDGV.Columns[3].HeaderText = "Tuesday " + bow.AddDays(2).Day;
+            WeekDGV.Columns[4].HeaderText = "Wednesday " + bow.AddDays(3).Day;
+            WeekDGV.Columns[5].HeaderText = "Thursday " + bow.AddDays(4).Day;
+            WeekDGV.Columns[6].HeaderText = "Friday " + bow.AddDays(5).Day;
+            WeekDGV.Columns[7].HeaderText = "Saturday " + bow.AddDays(6).Day;
 
             // Update Grid
             for (int i = 0; i < 24; i++)
@@ -319,8 +413,8 @@ namespace ScheduleBuilder
                 row.Cells[0].Value = new DateTime(DayDateTimePicker.Value.Year, DayDateTimePicker.Value.Month, DayDateTimePicker.Value.Day, i, 0, 0).ToString("hh:mm tt");
                 WeekDGV.Rows.Add(row);
             }
-            // Add Week Label Text
-            int dow = Convert.ToInt32(DayDateTimePicker.Value.DayOfWeek);
+
+            // Add Week Label Text            
             WeekLabel.Text = "Week of "
                 + DayDateTimePicker.Value.AddDays(-1 * dow).ToShortDateString()
                 + " through "
@@ -347,8 +441,29 @@ namespace ScheduleBuilder
             // CompareTo for DateTime returns less than 0 if earlier than, 0 when equal, and greater than 0 when later than.
             // This if statement ensures that the event falls on the selected calendar week. 
             if (item.StartDate.CompareTo(eow) <= 0 && item.StartDate.CompareTo(bow) >= 0)
-                WeekDGV.Rows[time].Cells[(int)item.StartDate.DayOfWeek + 1].Value = item.Subject.ToString();
-            // +1 for the Time Column Offset
+            {
+                int k = (int)item.StartDate.DayOfWeek + 1;
+                string priority = item.Priority;
+                WeekDGV.Rows[time].Cells[k].Value = item.Subject.ToString();
+
+                switch (priority)
+                {
+                    case "Low":
+                        WeekDGV.Rows[time].Cells[k].Style.BackColor = Backend.Constants.LOW_PRIORITY;
+                        break;
+                    case "Medium":
+                        WeekDGV.Rows[time].Cells[k].Style.BackColor = Backend.Constants.MED_PRIORITY;
+                        break;
+                    case "High":
+                        WeekDGV.Rows[time].Cells[k].Style.BackColor = Backend.Constants.HIGH_PRIORITY;
+                        break;
+                }
+
+
+                // +1 for the Time Column Offset
+            }
+
+
         }
 
         #endregion
@@ -577,17 +692,6 @@ namespace ScheduleBuilder
         }
 
         #endregion
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            foreach(Backend.User u in Users)
-            {
-                foreach (Backend.Event ev in u.Events)
-                {
-                    Console.WriteLine(ev.StartDate.ToString());
-                }
-            }
-            
-        }
+        
     }
 }

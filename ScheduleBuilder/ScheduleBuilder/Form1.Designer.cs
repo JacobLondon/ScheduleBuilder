@@ -33,8 +33,6 @@
             this.UserLabel = new System.Windows.Forms.Label();
             this.DayDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.EventDGV = new System.Windows.Forms.DataGridView();
-            this.TimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EventColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserGroupBox = new System.Windows.Forms.GroupBox();
             this.DeleteUserButton = new System.Windows.Forms.Button();
             this.AddUserButton = new System.Windows.Forms.Button();
@@ -45,8 +43,26 @@
             this.CalendarTabControl = new System.Windows.Forms.TabControl();
             this.EventTabPage = new System.Windows.Forms.TabPage();
             this.EventLabel = new System.Windows.Forms.Label();
+            this.DayTabPage = new System.Windows.Forms.TabPage();
+            this.DayLabel = new System.Windows.Forms.Label();
+            this.DayDGV = new System.Windows.Forms.DataGridView();
             this.WeekTabPage = new System.Windows.Forms.TabPage();
             this.WeekDGV = new System.Windows.Forms.DataGridView();
+            this.WeekLabel = new System.Windows.Forms.Label();
+            this.WeekNextButton = new System.Windows.Forms.Button();
+            this.WeekPrevButton = new System.Windows.Forms.Button();
+            this.MonthTabPage = new System.Windows.Forms.TabPage();
+            this.MonthDGV = new System.Windows.Forms.DataGridView();
+            this.MonthLabel = new System.Windows.Forms.Label();
+            this.MonthNextButton = new System.Windows.Forms.Button();
+            this.MonthPrevButton = new System.Windows.Forms.Button();
+            this.SundayMonthColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MondayMonthColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TuesdayMonthColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WednesdayMonthColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ThursdayMonthColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FridayMonthColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaturdayMonthColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TimeWeekColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SundayWeekColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MondayWeekColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,38 +71,21 @@
             this.ThursdayWeekColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FridayWeekColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaturdayWeekColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.WeekLabel = new System.Windows.Forms.Label();
-            this.WeekNextButton = new System.Windows.Forms.Button();
-            this.WeekPrevButton = new System.Windows.Forms.Button();
-            this.MonthTabPage = new System.Windows.Forms.TabPage();
-            this.MonthDGV = new System.Windows.Forms.DataGridView();
-            this.SundayMonthColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MondayMonthColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TuesdayMonthColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.WednesdayMonthColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ThursdayMonthColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FridayMonthColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaturdayMonthColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MonthLabel = new System.Windows.Forms.Label();
-            this.MonthNextButton = new System.Windows.Forms.Button();
-            this.MonthPrevButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.DayTabPage = new System.Windows.Forms.TabPage();
-            this.DayLabel = new System.Windows.Forms.Label();
-            this.DayDGV = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EventColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.EventDGV)).BeginInit();
             this.UserGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UserDGV)).BeginInit();
             this.CalendarTabControl.SuspendLayout();
             this.EventTabPage.SuspendLayout();
+            this.DayTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DayDGV)).BeginInit();
             this.WeekTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WeekDGV)).BeginInit();
             this.MonthTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MonthDGV)).BeginInit();
-            this.DayTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DayDGV)).BeginInit();
             this.SuspendLayout();
             // 
             // AddUserTextBox
@@ -125,25 +124,13 @@
             this.EventDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.TimeColumn,
             this.EventColumn});
-            this.EventDGV.Location = new System.Drawing.Point(6, 58);
+            this.EventDGV.Location = new System.Drawing.Point(6, 39);
+            this.EventDGV.MultiSelect = false;
             this.EventDGV.Name = "EventDGV";
             this.EventDGV.RowHeadersVisible = false;
             this.EventDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.EventDGV.Size = new System.Drawing.Size(821, 465);
+            this.EventDGV.Size = new System.Drawing.Size(824, 484);
             this.EventDGV.TabIndex = 0;
-            // 
-            // TimeColumn
-            // 
-            this.TimeColumn.HeaderText = "Time";
-            this.TimeColumn.Name = "TimeColumn";
-            this.TimeColumn.ReadOnly = true;
-            // 
-            // EventColumn
-            // 
-            this.EventColumn.HeaderText = "Events";
-            this.EventColumn.Name = "EventColumn";
-            this.EventColumn.ReadOnly = true;
-            this.EventColumn.Width = 715;
             // 
             // UserGroupBox
             // 
@@ -191,6 +178,7 @@
             this.UserDGV.Location = new System.Drawing.Point(6, 82);
             this.UserDGV.MultiSelect = false;
             this.UserDGV.Name = "UserDGV";
+            this.UserDGV.ReadOnly = true;
             this.UserDGV.RowHeadersVisible = false;
             this.UserDGV.Size = new System.Drawing.Size(242, 434);
             this.UserDGV.TabIndex = 2;
@@ -199,6 +187,7 @@
             // 
             this.UserNameColumn.HeaderText = "User Name";
             this.UserNameColumn.Name = "UserNameColumn";
+            this.UserNameColumn.ReadOnly = true;
             this.UserNameColumn.Width = 238;
             // 
             // UserComboBox
@@ -257,6 +246,45 @@
             this.EventLabel.TabIndex = 11;
             this.EventLabel.Text = "date here change on load";
             // 
+            // DayTabPage
+            // 
+            this.DayTabPage.Controls.Add(this.DayLabel);
+            this.DayTabPage.Controls.Add(this.DayDGV);
+            this.DayTabPage.Location = new System.Drawing.Point(4, 22);
+            this.DayTabPage.Name = "DayTabPage";
+            this.DayTabPage.Size = new System.Drawing.Size(836, 529);
+            this.DayTabPage.TabIndex = 3;
+            this.DayTabPage.Text = "Day View";
+            this.DayTabPage.UseVisualStyleBackColor = true;
+            // 
+            // DayLabel
+            // 
+            this.DayLabel.AutoSize = true;
+            this.DayLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DayLabel.Location = new System.Drawing.Point(321, 11);
+            this.DayLabel.Name = "DayLabel";
+            this.DayLabel.Size = new System.Drawing.Size(161, 16);
+            this.DayLabel.TabIndex = 13;
+            this.DayLabel.Text = "date here change on load";
+            // 
+            // DayDGV
+            // 
+            this.DayDGV.AllowUserToAddRows = false;
+            this.DayDGV.AllowUserToDeleteRows = false;
+            this.DayDGV.AllowUserToResizeRows = false;
+            this.DayDGV.BackgroundColor = System.Drawing.Color.White;
+            this.DayDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DayDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2});
+            this.DayDGV.Location = new System.Drawing.Point(6, 39);
+            this.DayDGV.MultiSelect = false;
+            this.DayDGV.Name = "DayDGV";
+            this.DayDGV.RowHeadersVisible = false;
+            this.DayDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DayDGV.Size = new System.Drawing.Size(824, 484);
+            this.DayDGV.TabIndex = 12;
+            // 
             // WeekTabPage
             // 
             this.WeekTabPage.Controls.Add(this.WeekDGV);
@@ -288,67 +316,14 @@
             this.FridayWeekColumn,
             this.SaturdayWeekColumn});
             this.WeekDGV.Location = new System.Drawing.Point(6, 39);
+            this.WeekDGV.MultiSelect = false;
             this.WeekDGV.Name = "WeekDGV";
             this.WeekDGV.ReadOnly = true;
             this.WeekDGV.RowHeadersVisible = false;
             this.WeekDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.WeekDGV.Size = new System.Drawing.Size(824, 484);
             this.WeekDGV.TabIndex = 11;
-            // 
-            // TimeWeekColumn
-            // 
-            this.TimeWeekColumn.HeaderText = "Time";
-            this.TimeWeekColumn.Name = "TimeWeekColumn";
-            this.TimeWeekColumn.ReadOnly = true;
-            // 
-            // SundayWeekColumn
-            // 
-            this.SundayWeekColumn.HeaderText = "Sunday";
-            this.SundayWeekColumn.Name = "SundayWeekColumn";
-            this.SundayWeekColumn.ReadOnly = true;
-            this.SundayWeekColumn.Width = 103;
-            // 
-            // MondayWeekColumn
-            // 
-            this.MondayWeekColumn.HeaderText = "Monday";
-            this.MondayWeekColumn.Name = "MondayWeekColumn";
-            this.MondayWeekColumn.ReadOnly = true;
-            this.MondayWeekColumn.Width = 103;
-            // 
-            // TuesdayWeekColumn
-            // 
-            this.TuesdayWeekColumn.HeaderText = "Tuesday";
-            this.TuesdayWeekColumn.Name = "TuesdayWeekColumn";
-            this.TuesdayWeekColumn.ReadOnly = true;
-            this.TuesdayWeekColumn.Width = 103;
-            // 
-            // WednesdayWeekColumn
-            // 
-            this.WednesdayWeekColumn.HeaderText = "Wednesday";
-            this.WednesdayWeekColumn.Name = "WednesdayWeekColumn";
-            this.WednesdayWeekColumn.ReadOnly = true;
-            this.WednesdayWeekColumn.Width = 103;
-            // 
-            // ThursdayWeekColumn
-            // 
-            this.ThursdayWeekColumn.HeaderText = "Thursday";
-            this.ThursdayWeekColumn.Name = "ThursdayWeekColumn";
-            this.ThursdayWeekColumn.ReadOnly = true;
-            this.ThursdayWeekColumn.Width = 103;
-            // 
-            // FridayWeekColumn
-            // 
-            this.FridayWeekColumn.HeaderText = "Friday";
-            this.FridayWeekColumn.Name = "FridayWeekColumn";
-            this.FridayWeekColumn.ReadOnly = true;
-            this.FridayWeekColumn.Width = 103;
-            // 
-            // SaturdayWeekColumn
-            // 
-            this.SaturdayWeekColumn.HeaderText = "Saturday";
-            this.SaturdayWeekColumn.Name = "SaturdayWeekColumn";
-            this.SaturdayWeekColumn.ReadOnly = true;
-            this.SaturdayWeekColumn.Width = 103;
+            this.WeekDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.WeekDGV_CellContentClick);
             // 
             // WeekLabel
             // 
@@ -409,61 +384,13 @@
             this.FridayMonthColumn,
             this.SaturdayMonthColumn});
             this.MonthDGV.Location = new System.Drawing.Point(6, 39);
+            this.MonthDGV.MultiSelect = false;
             this.MonthDGV.Name = "MonthDGV";
             this.MonthDGV.ReadOnly = true;
             this.MonthDGV.RowHeadersVisible = false;
             this.MonthDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.MonthDGV.Size = new System.Drawing.Size(824, 484);
             this.MonthDGV.TabIndex = 14;
-            // 
-            // SundayMonthColumn
-            // 
-            this.SundayMonthColumn.HeaderText = "Sunday";
-            this.SundayMonthColumn.Name = "SundayMonthColumn";
-            this.SundayMonthColumn.ReadOnly = true;
-            this.SundayMonthColumn.Width = 117;
-            // 
-            // MondayMonthColumn
-            // 
-            this.MondayMonthColumn.HeaderText = "Monday";
-            this.MondayMonthColumn.Name = "MondayMonthColumn";
-            this.MondayMonthColumn.ReadOnly = true;
-            this.MondayMonthColumn.Width = 117;
-            // 
-            // TuesdayMonthColumn
-            // 
-            this.TuesdayMonthColumn.HeaderText = "Tuesday";
-            this.TuesdayMonthColumn.Name = "TuesdayMonthColumn";
-            this.TuesdayMonthColumn.ReadOnly = true;
-            this.TuesdayMonthColumn.Width = 117;
-            // 
-            // WednesdayMonthColumn
-            // 
-            this.WednesdayMonthColumn.HeaderText = "Wednesday";
-            this.WednesdayMonthColumn.Name = "WednesdayMonthColumn";
-            this.WednesdayMonthColumn.ReadOnly = true;
-            this.WednesdayMonthColumn.Width = 117;
-            // 
-            // ThursdayMonthColumn
-            // 
-            this.ThursdayMonthColumn.HeaderText = "Thursday";
-            this.ThursdayMonthColumn.Name = "ThursdayMonthColumn";
-            this.ThursdayMonthColumn.ReadOnly = true;
-            this.ThursdayMonthColumn.Width = 117;
-            // 
-            // FridayMonthColumn
-            // 
-            this.FridayMonthColumn.HeaderText = "Friday";
-            this.FridayMonthColumn.Name = "FridayMonthColumn";
-            this.FridayMonthColumn.ReadOnly = true;
-            this.FridayMonthColumn.Width = 117;
-            // 
-            // SaturdayMonthColumn
-            // 
-            this.SaturdayMonthColumn.HeaderText = "Saturday";
-            this.SaturdayMonthColumn.Name = "SaturdayMonthColumn";
-            this.SaturdayMonthColumn.ReadOnly = true;
-            this.SaturdayMonthColumn.Width = 118;
             // 
             // MonthLabel
             // 
@@ -495,74 +422,160 @@
             this.MonthPrevButton.UseVisualStyleBackColor = true;
             this.MonthPrevButton.Click += new System.EventHandler(this.MonthPrevButton_Click);
             // 
-            // button1
+            // SundayMonthColumn
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(787, 9);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(168, 27);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "test";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.SundayMonthColumn.HeaderText = "Sunday";
+            this.SundayMonthColumn.Name = "SundayMonthColumn";
+            this.SundayMonthColumn.ReadOnly = true;
+            this.SundayMonthColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.SundayMonthColumn.Width = 117;
             // 
-            // DayTabPage
+            // MondayMonthColumn
             // 
-            this.DayTabPage.Controls.Add(this.DayLabel);
-            this.DayTabPage.Controls.Add(this.DayDGV);
-            this.DayTabPage.Location = new System.Drawing.Point(4, 22);
-            this.DayTabPage.Name = "DayTabPage";
-            this.DayTabPage.Size = new System.Drawing.Size(836, 529);
-            this.DayTabPage.TabIndex = 3;
-            this.DayTabPage.Text = "Day View";
-            this.DayTabPage.UseVisualStyleBackColor = true;
+            this.MondayMonthColumn.HeaderText = "Monday";
+            this.MondayMonthColumn.Name = "MondayMonthColumn";
+            this.MondayMonthColumn.ReadOnly = true;
+            this.MondayMonthColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.MondayMonthColumn.Width = 117;
             // 
-            // DayLabel
+            // TuesdayMonthColumn
             // 
-            this.DayLabel.AutoSize = true;
-            this.DayLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DayLabel.Location = new System.Drawing.Point(323, 8);
-            this.DayLabel.Name = "DayLabel";
-            this.DayLabel.Size = new System.Drawing.Size(161, 16);
-            this.DayLabel.TabIndex = 13;
-            this.DayLabel.Text = "date here change on load";
+            this.TuesdayMonthColumn.HeaderText = "Tuesday";
+            this.TuesdayMonthColumn.Name = "TuesdayMonthColumn";
+            this.TuesdayMonthColumn.ReadOnly = true;
+            this.TuesdayMonthColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.TuesdayMonthColumn.Width = 117;
             // 
-            // DayDGV
+            // WednesdayMonthColumn
             // 
-            this.DayDGV.AllowUserToAddRows = false;
-            this.DayDGV.AllowUserToDeleteRows = false;
-            this.DayDGV.AllowUserToResizeRows = false;
-            this.DayDGV.BackgroundColor = System.Drawing.Color.White;
-            this.DayDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DayDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2});
-            this.DayDGV.Location = new System.Drawing.Point(8, 55);
-            this.DayDGV.Name = "DayDGV";
-            this.DayDGV.RowHeadersVisible = false;
-            this.DayDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DayDGV.Size = new System.Drawing.Size(821, 465);
-            this.DayDGV.TabIndex = 12;
+            this.WednesdayMonthColumn.HeaderText = "Wednesday";
+            this.WednesdayMonthColumn.Name = "WednesdayMonthColumn";
+            this.WednesdayMonthColumn.ReadOnly = true;
+            this.WednesdayMonthColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.WednesdayMonthColumn.Width = 117;
+            // 
+            // ThursdayMonthColumn
+            // 
+            this.ThursdayMonthColumn.HeaderText = "Thursday";
+            this.ThursdayMonthColumn.Name = "ThursdayMonthColumn";
+            this.ThursdayMonthColumn.ReadOnly = true;
+            this.ThursdayMonthColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ThursdayMonthColumn.Width = 117;
+            // 
+            // FridayMonthColumn
+            // 
+            this.FridayMonthColumn.HeaderText = "Friday";
+            this.FridayMonthColumn.Name = "FridayMonthColumn";
+            this.FridayMonthColumn.ReadOnly = true;
+            this.FridayMonthColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.FridayMonthColumn.Width = 117;
+            // 
+            // SaturdayMonthColumn
+            // 
+            this.SaturdayMonthColumn.HeaderText = "Saturday";
+            this.SaturdayMonthColumn.Name = "SaturdayMonthColumn";
+            this.SaturdayMonthColumn.ReadOnly = true;
+            this.SaturdayMonthColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.SaturdayMonthColumn.Width = 118;
+            // 
+            // TimeWeekColumn
+            // 
+            this.TimeWeekColumn.HeaderText = "Time";
+            this.TimeWeekColumn.Name = "TimeWeekColumn";
+            this.TimeWeekColumn.ReadOnly = true;
+            this.TimeWeekColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // SundayWeekColumn
+            // 
+            this.SundayWeekColumn.HeaderText = "Sunday";
+            this.SundayWeekColumn.Name = "SundayWeekColumn";
+            this.SundayWeekColumn.ReadOnly = true;
+            this.SundayWeekColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.SundayWeekColumn.Width = 103;
+            // 
+            // MondayWeekColumn
+            // 
+            this.MondayWeekColumn.HeaderText = "Monday";
+            this.MondayWeekColumn.Name = "MondayWeekColumn";
+            this.MondayWeekColumn.ReadOnly = true;
+            this.MondayWeekColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.MondayWeekColumn.Width = 103;
+            // 
+            // TuesdayWeekColumn
+            // 
+            this.TuesdayWeekColumn.HeaderText = "Tuesday";
+            this.TuesdayWeekColumn.Name = "TuesdayWeekColumn";
+            this.TuesdayWeekColumn.ReadOnly = true;
+            this.TuesdayWeekColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.TuesdayWeekColumn.Width = 103;
+            // 
+            // WednesdayWeekColumn
+            // 
+            this.WednesdayWeekColumn.HeaderText = "Wednesday";
+            this.WednesdayWeekColumn.Name = "WednesdayWeekColumn";
+            this.WednesdayWeekColumn.ReadOnly = true;
+            this.WednesdayWeekColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.WednesdayWeekColumn.Width = 103;
+            // 
+            // ThursdayWeekColumn
+            // 
+            this.ThursdayWeekColumn.HeaderText = "Thursday";
+            this.ThursdayWeekColumn.Name = "ThursdayWeekColumn";
+            this.ThursdayWeekColumn.ReadOnly = true;
+            this.ThursdayWeekColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ThursdayWeekColumn.Width = 103;
+            // 
+            // FridayWeekColumn
+            // 
+            this.FridayWeekColumn.HeaderText = "Friday";
+            this.FridayWeekColumn.Name = "FridayWeekColumn";
+            this.FridayWeekColumn.ReadOnly = true;
+            this.FridayWeekColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.FridayWeekColumn.Width = 103;
+            // 
+            // SaturdayWeekColumn
+            // 
+            this.SaturdayWeekColumn.HeaderText = "Saturday";
+            this.SaturdayWeekColumn.Name = "SaturdayWeekColumn";
+            this.SaturdayWeekColumn.ReadOnly = true;
+            this.SaturdayWeekColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.SaturdayWeekColumn.Width = 103;
             // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.HeaderText = "Time";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.HeaderText = "Events";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.dataGridViewTextBoxColumn2.Width = 715;
+            // 
+            // TimeColumn
+            // 
+            this.TimeColumn.HeaderText = "Time";
+            this.TimeColumn.Name = "TimeColumn";
+            this.TimeColumn.ReadOnly = true;
+            this.TimeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // EventColumn
+            // 
+            this.EventColumn.HeaderText = "Events";
+            this.EventColumn.Name = "EventColumn";
+            this.EventColumn.ReadOnly = true;
+            this.EventColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.EventColumn.Width = 715;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1107, 597);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.UserGroupBox);
             this.Controls.Add(this.DayDateTimePicker);
             this.Controls.Add(this.CalendarTabControl);
@@ -580,15 +593,15 @@
             this.CalendarTabControl.ResumeLayout(false);
             this.EventTabPage.ResumeLayout(false);
             this.EventTabPage.PerformLayout();
+            this.DayTabPage.ResumeLayout(false);
+            this.DayTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DayDGV)).EndInit();
             this.WeekTabPage.ResumeLayout(false);
             this.WeekTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WeekDGV)).EndInit();
             this.MonthTabPage.ResumeLayout(false);
             this.MonthTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MonthDGV)).EndInit();
-            this.DayTabPage.ResumeLayout(false);
-            this.DayTabPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DayDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -620,6 +633,9 @@
         private System.Windows.Forms.Button MonthNextButton;
         private System.Windows.Forms.Button MonthPrevButton;
         private System.Windows.Forms.Label EventLabel;
+        private System.Windows.Forms.TabPage DayTabPage;
+        private System.Windows.Forms.Label DayLabel;
+        private System.Windows.Forms.DataGridView DayDGV;
         private System.Windows.Forms.DataGridViewTextBoxColumn SundayMonthColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn MondayMonthColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn TuesdayMonthColumn;
@@ -627,6 +643,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ThursdayMonthColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn FridayMonthColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaturdayMonthColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeWeekColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SundayWeekColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn MondayWeekColumn;
@@ -637,12 +655,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SaturdayWeekColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn EventColumn;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TabPage DayTabPage;
-        private System.Windows.Forms.Label DayLabel;
-        private System.Windows.Forms.DataGridView DayDGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
     }
 }
 
