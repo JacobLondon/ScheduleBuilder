@@ -4,6 +4,7 @@ from datetime import datetime
 import re
 
 magic_string = '-' * 32
+register = ' is not registered.'
 
 """
 Disco github: https://github.com/b1naryth1ef/disco
@@ -31,7 +32,12 @@ class SimplePlugin(Plugin):
     def on_events_command(self, event, content):
         user = get_user_data(str(event.msg.author))
 
+        if not user:
+            event.msg.reply(str(event.msg.author) + register)
+            return;
+
         builder = magic_string + '\n'
+
         for schedule_event in user.Events:
 
             # get the date
@@ -63,6 +69,10 @@ class SimplePlugin(Plugin):
 
         user = get_user_data(str(event.msg.author))
 
+        if not user:
+            event.msg.reply(event.msg.author + register)
+            return;
+
         builder = magic_string + '\n'
         for schedule_event in user.Events:
 
@@ -72,7 +82,7 @@ class SimplePlugin(Plugin):
 
             # get first char (low, medium, high)
             match = content[0]
-            if match in schedule_event.Priority:
+            if match.lower() in schedule_event.Priority.lower():
                 builder += f'Subject: {schedule_event.Subject}\n'
                 builder += f'Starts: {time}\n'
                 builder += magic_string + '\n'
@@ -82,11 +92,40 @@ class SimplePlugin(Plugin):
         else:
             event.msg.reply(builder)
 
+
+    # show next event
+    @Plugin.command('next')
+    def on_next_command(self, event):
+
+        user = get_user_data(str(event.msg.author))
+
+        if not user:
+            event.msg.reply(event.msg.author + register)
+            return;
+
+        schedule_event = user.Events[0]
+
+        builder = magic_string + '\n'
+
+        # get the date
+        millis = int(re.search(r'\d+', schedule_event.StartDate).group(0))
+        time = datetime.utcfromtimestamp(millis / 1000)
+
+        builder += f'Subject: {schedule_event.Subject}\n'
+        builder += f'Starts: {time}\n'
+
+        builder += magic_string + '\n'
+
+        event.msg.reply(builder)
+
+
     # Example
     @Plugin.command('help')
     def on_test_command(self, event):
 
         builder = 'Commands:\n'
+
+        builder += 'help\n'
 
         builder += 'events <l,p,d> - View all events\n\t'
         builder += 'v: standard view\n\t'
@@ -94,11 +133,11 @@ class SimplePlugin(Plugin):
         builder += 'p: priority\n\t'
         builder += 'd: description\n'
 
-        builder += 'help\n'
-
         builder += 'priority <l, m, h>\n\t'
         builder += 'l: low priority\n\t'
         builder += 'm: medium priority\n\t'
         builder += 'h: high priority\n'
+
+        builder += 'next: View next event\n'
 
         event.msg.reply(builder)

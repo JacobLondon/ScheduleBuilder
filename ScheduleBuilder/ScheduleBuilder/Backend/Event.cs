@@ -57,14 +57,5 @@ namespace ScheduleBuilder.Backend
         {
 
         }
-
-        public void FillDayDGV(ref DataGridView DayDGV)
-        {
-            //clear row
-            //add row
-            //get data from form 1
-            //repeat (as many times as necessary)
-            //sort data by time
-        }
     }
 }
