@@ -66,7 +66,7 @@ namespace ScheduleBuilder.Backend
                     repeatingEvents.Add(e);
                     continue;
                 }
-
+                // repeats yearly, check if the day of the year is the same
                 else if(e.RepeatOccurence == Constants.RepeatList[(int)Constants.RepeatOccurence.Yearly]
                     && e.StartDate.DayOfYear == day.DayOfYear)
                 {

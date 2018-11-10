@@ -57,5 +57,10 @@ namespace ScheduleBuilder.Backend
         {
 
         }
+        
+        public override string ToString()
+        {
+            return Subject;
+        }
     }
 }
