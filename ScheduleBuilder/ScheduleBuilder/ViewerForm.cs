@@ -29,12 +29,12 @@ namespace ScheduleBuilder
             SubjectTextBox.Text = UserEvent.Subject;
             StartDateTimePicker.Value = UserEvent.StartDate;
             FinishDateTimePicker.Value = UserEvent.FinishDate;
-            StartTimeComboBox.Text = UserEvent.StartDate.TimeOfDay.ToString("hh:mm tt");
-            FinishTimeComboBox.Text = UserEvent.FinishDate.TimeOfDay.ToString("hh:mm tt");
+            StartTextBox.Text = UserEvent.StartDate.TimeOfDay.ToString();
+            FinishTextBox.Text = UserEvent.FinishDate.TimeOfDay.ToString();
             RepeatCheckBox.Checked = UserEvent.EventRepeats;
-            RepeatOccurrencesComboBox.Text = UserEvent.RepeatOccurence;
+            RepeatOccurrencesTextBox.Text = UserEvent.RepeatOccurence;
             LocationTextBox.Text = UserEvent.Location;
-            PriorityComboBox.Text = UserEvent.Priority;
+            PriorityTextBox.Text = UserEvent.Priority;
             DescriptionTextBox.Text = UserEvent.Description;
         }
 

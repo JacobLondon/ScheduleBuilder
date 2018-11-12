@@ -29,15 +29,11 @@
         private void InitializeComponent()
         {
             this.AllDayCheckBox = new System.Windows.Forms.CheckBox();
-            this.PriorityComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.RepeatOccurrencesComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.RepeatCheckBox = new System.Windows.Forms.CheckBox();
             this.StartDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.FinishTimeComboBox = new System.Windows.Forms.ComboBox();
             this.FinishLabel = new System.Windows.Forms.Label();
-            this.StartTimeComboBox = new System.Windows.Forms.ComboBox();
             this.SubjectTextBox = new System.Windows.Forms.TextBox();
             this.LocationTextBox = new System.Windows.Forms.TextBox();
             this.LocationLabel = new System.Windows.Forms.Label();
@@ -47,6 +43,10 @@
             this.SubjectLabel = new System.Windows.Forms.Label();
             this.FinishDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.RemoveEventButton = new System.Windows.Forms.Button();
+            this.StartTextBox = new System.Windows.Forms.TextBox();
+            this.FinishTextBox = new System.Windows.Forms.TextBox();
+            this.RepeatOccurrencesTextBox = new System.Windows.Forms.TextBox();
+            this.PriorityTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // AllDayCheckBox
@@ -60,16 +60,6 @@
             this.AllDayCheckBox.Text = "All-day";
             this.AllDayCheckBox.UseVisualStyleBackColor = true;
             // 
-            // PriorityComboBox
-            // 
-            this.PriorityComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.PriorityComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PriorityComboBox.FormattingEnabled = true;
-            this.PriorityComboBox.Location = new System.Drawing.Point(77, 156);
-            this.PriorityComboBox.Name = "PriorityComboBox";
-            this.PriorityComboBox.Size = new System.Drawing.Size(121, 24);
-            this.PriorityComboBox.TabIndex = 40;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -79,16 +69,6 @@
             this.label2.Size = new System.Drawing.Size(49, 16);
             this.label2.TabIndex = 39;
             this.label2.Text = "Priority";
-            // 
-            // RepeatOccurrencesComboBox
-            // 
-            this.RepeatOccurrencesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.RepeatOccurrencesComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RepeatOccurrencesComboBox.FormattingEnabled = true;
-            this.RepeatOccurrencesComboBox.Location = new System.Drawing.Point(348, 96);
-            this.RepeatOccurrencesComboBox.Name = "RepeatOccurrencesComboBox";
-            this.RepeatOccurrencesComboBox.Size = new System.Drawing.Size(121, 24);
-            this.RepeatOccurrencesComboBox.TabIndex = 38;
             // 
             // label1
             // 
@@ -119,16 +99,6 @@
             this.StartDateTimePicker.Size = new System.Drawing.Size(262, 22);
             this.StartDateTimePicker.TabIndex = 35;
             // 
-            // FinishTimeComboBox
-            // 
-            this.FinishTimeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.FinishTimeComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FinishTimeComboBox.FormattingEnabled = true;
-            this.FinishTimeComboBox.Location = new System.Drawing.Point(348, 66);
-            this.FinishTimeComboBox.Name = "FinishTimeComboBox";
-            this.FinishTimeComboBox.Size = new System.Drawing.Size(121, 24);
-            this.FinishTimeComboBox.TabIndex = 34;
-            // 
             // FinishLabel
             // 
             this.FinishLabel.AutoSize = true;
@@ -138,16 +108,6 @@
             this.FinishLabel.Size = new System.Drawing.Size(43, 16);
             this.FinishLabel.TabIndex = 33;
             this.FinishLabel.Text = "Finish";
-            // 
-            // StartTimeComboBox
-            // 
-            this.StartTimeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.StartTimeComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StartTimeComboBox.FormattingEnabled = true;
-            this.StartTimeComboBox.Location = new System.Drawing.Point(348, 34);
-            this.StartTimeComboBox.Name = "StartTimeComboBox";
-            this.StartTimeComboBox.Size = new System.Drawing.Size(121, 24);
-            this.StartTimeComboBox.TabIndex = 32;
             // 
             // SubjectTextBox
             // 
@@ -235,22 +195,54 @@
             this.RemoveEventButton.UseVisualStyleBackColor = true;
             this.RemoveEventButton.Click += new System.EventHandler(this.RemoveEventButton_Click);
             // 
+            // StartTextBox
+            // 
+            this.StartTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StartTextBox.Location = new System.Drawing.Point(348, 36);
+            this.StartTextBox.Name = "StartTextBox";
+            this.StartTextBox.Size = new System.Drawing.Size(121, 22);
+            this.StartTextBox.TabIndex = 44;
+            // 
+            // FinishTextBox
+            // 
+            this.FinishTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FinishTextBox.Location = new System.Drawing.Point(348, 66);
+            this.FinishTextBox.Name = "FinishTextBox";
+            this.FinishTextBox.Size = new System.Drawing.Size(121, 22);
+            this.FinishTextBox.TabIndex = 45;
+            // 
+            // RepeatOccurrencesTextBox
+            // 
+            this.RepeatOccurrencesTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RepeatOccurrencesTextBox.Location = new System.Drawing.Point(348, 96);
+            this.RepeatOccurrencesTextBox.Name = "RepeatOccurrencesTextBox";
+            this.RepeatOccurrencesTextBox.Size = new System.Drawing.Size(121, 22);
+            this.RepeatOccurrencesTextBox.TabIndex = 46;
+            // 
+            // PriorityTextBox
+            // 
+            this.PriorityTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PriorityTextBox.Location = new System.Drawing.Point(77, 156);
+            this.PriorityTextBox.Name = "PriorityTextBox";
+            this.PriorityTextBox.Size = new System.Drawing.Size(121, 22);
+            this.PriorityTextBox.TabIndex = 47;
+            // 
             // ViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(477, 487);
+            this.Controls.Add(this.PriorityTextBox);
+            this.Controls.Add(this.RepeatOccurrencesTextBox);
+            this.Controls.Add(this.FinishTextBox);
+            this.Controls.Add(this.StartTextBox);
             this.Controls.Add(this.RemoveEventButton);
             this.Controls.Add(this.AllDayCheckBox);
-            this.Controls.Add(this.PriorityComboBox);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.RepeatOccurrencesComboBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.RepeatCheckBox);
             this.Controls.Add(this.StartDateTimePicker);
-            this.Controls.Add(this.FinishTimeComboBox);
             this.Controls.Add(this.FinishLabel);
-            this.Controls.Add(this.StartTimeComboBox);
             this.Controls.Add(this.SubjectTextBox);
             this.Controls.Add(this.LocationTextBox);
             this.Controls.Add(this.LocationLabel);
@@ -269,15 +261,11 @@
 
         #endregion
         private System.Windows.Forms.CheckBox AllDayCheckBox;
-        private System.Windows.Forms.ComboBox PriorityComboBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox RepeatOccurrencesComboBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox RepeatCheckBox;
         private System.Windows.Forms.DateTimePicker StartDateTimePicker;
-        private System.Windows.Forms.ComboBox FinishTimeComboBox;
         private System.Windows.Forms.Label FinishLabel;
-        private System.Windows.Forms.ComboBox StartTimeComboBox;
         private System.Windows.Forms.TextBox SubjectTextBox;
         private System.Windows.Forms.TextBox LocationTextBox;
         private System.Windows.Forms.Label LocationLabel;
@@ -287,5 +275,9 @@
         private System.Windows.Forms.Label SubjectLabel;
         private System.Windows.Forms.DateTimePicker FinishDateTimePicker;
         private System.Windows.Forms.Button RemoveEventButton;
+        private System.Windows.Forms.TextBox StartTextBox;
+        private System.Windows.Forms.TextBox FinishTextBox;
+        private System.Windows.Forms.TextBox RepeatOccurrencesTextBox;
+        private System.Windows.Forms.TextBox PriorityTextBox;
     }
 }

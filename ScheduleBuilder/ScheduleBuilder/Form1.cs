@@ -51,6 +51,18 @@ namespace ScheduleBuilder
                 Users.Add(user);
             }
 
+            // fix 8-hour offset
+            foreach(Backend.User u in Users)
+            {
+                foreach(Backend.Event ev in u.Events)
+                {
+                    ev.StartDate = ev.StartDate.AddHours(-8);
+                    ev.StartTime = ev.StartTime.AddHours(-8);
+                    ev.FinishDate = ev.FinishDate.AddHours(-8);
+                    ev.FinishTime = ev.FinishTime.AddHours(-8);
+                }
+            }
+
             UpdateUserComboBox();
             UpdateInterface();
         }
@@ -692,6 +704,11 @@ namespace ScheduleBuilder
         }
 
         #endregion
-        
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ViewerForm f = new ViewerForm(this, CurrentUser.Events[0]);
+            f.Show();
+        }
     }
 }
