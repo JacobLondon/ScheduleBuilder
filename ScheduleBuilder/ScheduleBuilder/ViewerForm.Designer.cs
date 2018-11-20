@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewerForm));
             this.AllDayCheckBox = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -52,6 +53,7 @@
             // AllDayCheckBox
             // 
             this.AllDayCheckBox.AutoSize = true;
+            this.AllDayCheckBox.Enabled = false;
             this.AllDayCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AllDayCheckBox.Location = new System.Drawing.Point(348, 8);
             this.AllDayCheckBox.Name = "AllDayCheckBox";
@@ -83,6 +85,7 @@
             // RepeatCheckBox
             // 
             this.RepeatCheckBox.AutoSize = true;
+            this.RepeatCheckBox.Enabled = false;
             this.RepeatCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RepeatCheckBox.Location = new System.Drawing.Point(189, 98);
             this.RepeatCheckBox.Name = "RepeatCheckBox";
@@ -93,6 +96,7 @@
             // 
             // StartDateTimePicker
             // 
+            this.StartDateTimePicker.Enabled = false;
             this.StartDateTimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StartDateTimePicker.Location = new System.Drawing.Point(77, 34);
             this.StartDateTimePicker.Name = "StartDateTimePicker";
@@ -114,6 +118,7 @@
             this.SubjectTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SubjectTextBox.Location = new System.Drawing.Point(77, 6);
             this.SubjectTextBox.Name = "SubjectTextBox";
+            this.SubjectTextBox.ReadOnly = true;
             this.SubjectTextBox.Size = new System.Drawing.Size(262, 22);
             this.SubjectTextBox.TabIndex = 31;
             this.SubjectTextBox.TextChanged += new System.EventHandler(this.SubjectTextBox_TextChanged);
@@ -123,6 +128,7 @@
             this.LocationTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LocationTextBox.Location = new System.Drawing.Point(77, 128);
             this.LocationTextBox.Name = "LocationTextBox";
+            this.LocationTextBox.ReadOnly = true;
             this.LocationTextBox.Size = new System.Drawing.Size(262, 22);
             this.LocationTextBox.TabIndex = 30;
             // 
@@ -142,6 +148,7 @@
             this.DescriptionTextBox.Location = new System.Drawing.Point(3, 202);
             this.DescriptionTextBox.Multiline = true;
             this.DescriptionTextBox.Name = "DescriptionTextBox";
+            this.DescriptionTextBox.ReadOnly = true;
             this.DescriptionTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.DescriptionTextBox.Size = new System.Drawing.Size(466, 242);
             this.DescriptionTextBox.TabIndex = 28;
@@ -178,6 +185,7 @@
             // 
             // FinishDateTimePicker
             // 
+            this.FinishDateTimePicker.Enabled = false;
             this.FinishDateTimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FinishDateTimePicker.Location = new System.Drawing.Point(77, 64);
             this.FinishDateTimePicker.Name = "FinishDateTimePicker";
@@ -200,6 +208,7 @@
             this.StartTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StartTextBox.Location = new System.Drawing.Point(348, 36);
             this.StartTextBox.Name = "StartTextBox";
+            this.StartTextBox.ReadOnly = true;
             this.StartTextBox.Size = new System.Drawing.Size(121, 22);
             this.StartTextBox.TabIndex = 44;
             // 
@@ -208,6 +217,7 @@
             this.FinishTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FinishTextBox.Location = new System.Drawing.Point(348, 66);
             this.FinishTextBox.Name = "FinishTextBox";
+            this.FinishTextBox.ReadOnly = true;
             this.FinishTextBox.Size = new System.Drawing.Size(121, 22);
             this.FinishTextBox.TabIndex = 45;
             // 
@@ -216,6 +226,7 @@
             this.RepeatOccurrencesTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RepeatOccurrencesTextBox.Location = new System.Drawing.Point(348, 96);
             this.RepeatOccurrencesTextBox.Name = "RepeatOccurrencesTextBox";
+            this.RepeatOccurrencesTextBox.ReadOnly = true;
             this.RepeatOccurrencesTextBox.Size = new System.Drawing.Size(121, 22);
             this.RepeatOccurrencesTextBox.TabIndex = 46;
             // 
@@ -224,6 +235,7 @@
             this.PriorityTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PriorityTextBox.Location = new System.Drawing.Point(77, 156);
             this.PriorityTextBox.Name = "PriorityTextBox";
+            this.PriorityTextBox.ReadOnly = true;
             this.PriorityTextBox.Size = new System.Drawing.Size(121, 22);
             this.PriorityTextBox.TabIndex = 47;
             // 
@@ -231,7 +243,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(477, 487);
+            this.ClientSize = new System.Drawing.Size(472, 481);
             this.Controls.Add(this.PriorityTextBox);
             this.Controls.Add(this.RepeatOccurrencesTextBox);
             this.Controls.Add(this.FinishTextBox);
@@ -251,8 +263,9 @@
             this.Controls.Add(this.StartLabel);
             this.Controls.Add(this.SubjectLabel);
             this.Controls.Add(this.FinishDateTimePicker);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ViewerForm";
-            this.Text = "ViewerForm";
+            this.Text = "Event Viewer";
             this.Load += new System.EventHandler(this.ViewerForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

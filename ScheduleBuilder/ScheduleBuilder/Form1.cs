@@ -18,6 +18,10 @@ namespace ScheduleBuilder
 
         private Backend.User CurrentUser;
 
+        // when the program has finished turning on, this becomes false
+        // prevent component updates on index changes when the program loads
+        bool loading = true;
+
         public Form1()
         {
             InitializeComponent();
@@ -29,42 +33,32 @@ namespace ScheduleBuilder
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            EventLabel.Text = DayDateTimePicker.Value.ToShortDateString();
-
-            // Daniel Added label update for initial load
-            int dow = Convert.ToInt32(DayDateTimePicker.Value.DayOfWeek);
-            WeekLabel.Text = "Week of "
-                + DayDateTimePicker.Value.AddDays(-1 * dow).ToShortDateString()
-                + " through " + DayDateTimePicker.Value.AddDays(6 - dow).ToShortDateString();
-
             // check if the save location exists
             if (!Directory.Exists(Backend.Constants.SAVE_DIRECTORY))
             {
                 Directory.CreateDirectory(Backend.Constants.SAVE_DIRECTORY);
             }
 
-            // try to deserialize all files to users
+            // deserialize all files to users
             foreach (var file in Directory.EnumerateFiles(Backend.Constants.SAVE_DIRECTORY, "*.json"))
             {
                 Console.WriteLine(file);
                 var user = new JavaScriptSerializer().Deserialize<Backend.User>(File.ReadAllText(file));
-                Users.Add(user);
-            }
 
-            // fix 8-hour offset
-            foreach(Backend.User u in Users)
-            {
-                foreach(Backend.Event ev in u.Events)
+                // correct UTC/GMT automatic conversion to local time
+                foreach(Backend.Event current in user.Events)
                 {
-                    ev.StartDate = ev.StartDate.AddHours(-8);
-                    ev.StartTime = ev.StartTime.AddHours(-8);
-                    ev.FinishDate = ev.FinishDate.AddHours(-8);
-                    ev.FinishTime = ev.FinishTime.AddHours(-8);
+                    current.StartDate = current.StartDate.ToLocalTime();
+                    current.FinishDate = current.FinishDate.ToLocalTime();
                 }
+
+                Users.Add(user);
             }
 
             UpdateUserComboBox();
             UpdateInterface();
+
+            loading = false;
         }
 
         private void InitializeVariables()
@@ -76,6 +70,16 @@ namespace ScheduleBuilder
         private void InitializeEvents()
         {
             AddUserTextBox.KeyDown += AddUserTextBox_KeyDown;
+
+            if(loading == false)
+                UserDGV.SelectionChanged += UserComboBox_SelectedChanged;
+
+            EventDGV.DoubleClick += EventDGV_DoubleClick;
+            DayDGV.DoubleClick += DayDGV_DoubleClick;
+            WeekDGV.DoubleClick += WeekDGV_DoubleClick;
+            MonthDGV.DoubleClick += MonthDGV_DoubleClick;
+
+            MonthDGV.RowsAdded += new DataGridViewRowsAddedEventHandler(MonthDGV_RowsAdded);
         }
         
         public void UpdateInterface()
@@ -83,16 +87,11 @@ namespace ScheduleBuilder
             // update the user dgv
             UpdateUserDGV();
 
-            // update the day datagridview with event items
-            FillDayDGV(ref DayDGV);
-            FillDayDGV(ref EventDGV);
-
-            // Daniel Added FillWeekDGV to UpdateInterface
-            FillWeekDGV(ref WeekDGV);
-
-            // MADE BY DAVID
-            LoadMonthDGV();
-            MonthLabelUpdate(DayDateTimePicker.Value.Month);
+            // update all of the tabs
+            UpdateEvents();
+            UpdateDay();
+            UpdateWeek();
+            UpdateMonth();
 
             JSONSerialize();
         }
@@ -231,7 +230,7 @@ namespace ScheduleBuilder
         }
 
         // update the currently selected user
-        private void UserComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void UserComboBox_SelectedChanged(object sender, EventArgs e)
         {
             string currentUsername = UserComboBox.Text;
             var temp = Users.Where(u => u.Username == currentUsername).FirstOrDefault();
@@ -250,86 +249,6 @@ namespace ScheduleBuilder
             UpdateInterface();
         }
 
-        #endregion
-
-        #region DayTab
-
-        // Alex Created FillDayDGV
-        public void FillDayDGV(ref DataGridView DayDGV)
-        {
-            // clear rows       
-            DayDGV.Rows.Clear();
-            DayLabel.Text = DayDateTimePicker.Value.ToShortDateString();
-            FillDGVWithTimes(ref DayDGV);
-            foreach (DataGridViewRow row in DayDGV.Rows)
-            {
-                foreach (Backend.Event item in CurrentUser.Events)
-                {
-                    if (item.StartDate.Date == DayDateTimePicker.Value.Date && row.Cells[0].Value.ToString() == item.StartDate.ToString("hh:mm tt"))
-                    {
-                        row.Cells[0].Value = item.StartDate.ToString("hh:mm tt");
-                        row.Cells[1].Value += item.Subject.ToString();
-                        if (item.Priority == "Low")
-                        //item.Priority == Backend.Constants.PriorityList[Backend.Constants.Priority.Low])
-                        {
-                            row.Cells[0].Style.BackColor = Backend.Constants.LOW_PRIORITY;
-                            row.Cells[1].Style.BackColor = Backend.Constants.LOW_PRIORITY;
-                        }
-                        else if (item.Priority == "Medium")
-                        {
-                            row.Cells[0].Style.BackColor = Backend.Constants.MED_PRIORITY;
-                            row.Cells[1].Style.BackColor = Backend.Constants.MED_PRIORITY;
-                        }
-                        else if (item.Priority == "High")
-                        {
-                            row.Cells[0].Style.BackColor = Backend.Constants.HIGH_PRIORITY;
-                            row.Cells[1].Style.BackColor = Backend.Constants.HIGH_PRIORITY;
-                        }
-                    }
-                }
-            }
-            DayDGV.Refresh();
-        }
-
-        //Alex - Fill Data Grid View with times 
-        public void FillDGVWithTimes(ref DataGridView DGV)
-        {
-            for (int i = 6; i < 24; i++)
-            {
-                DataGridViewRow row = new DataGridViewRow();
-                row.CreateCells(DGV);
-                row.Cells[0].Value = new DateTime(DayDateTimePicker.Value.Year, DayDateTimePicker.Value.Month, DayDateTimePicker.Value.Day, i, 0, 0).ToString("hh:mm tt");
-                DGV.Rows.Add(row);
-            }
-            for (int i = 0; i < 6; i++)
-            {
-                DataGridViewRow row = new DataGridViewRow();
-                row.CreateCells(DGV);
-                row.Cells[0].Value = new DateTime(DayDateTimePicker.Value.Year, DayDateTimePicker.Value.Month, DayDateTimePicker.Value.Day, i, 0, 0).ToString("hh:mm tt");
-                DGV.Rows.Add(row);
-            }
-        }
-
-        // Alex Created FillEventDGV (useful for debugging)
-        public void FillEventDGV(ref DataGridView EventDGV)
-        {
-            // clear rows       
-            EventDGV.Rows.Clear();
-            EventLabel.Text = DayDateTimePicker.Value.ToShortDateString();
-
-            // put event items in the event rows
-            foreach (Backend.Event item in CurrentUser.Events)
-            {
-                DataGridViewRow StartRow = new DataGridViewRow();
-                StartRow.CreateCells(EventDGV);
-                StartRow.Cells[0].Value = item.StartDate.ToString("hh:mm tt");
-                StartRow.Cells[1].Value = item.Subject.ToString();
-                EventDGV.Rows.Add(StartRow);
-            }
-            EventDGV.Refresh();
-        }
-
-        //Alex -Update UserComboBox on index change in UserDGV
         private void UserDGV_SelectionChanged(object sender, EventArgs e)
         {
             DataGridView dgv = sender as DataGridView;
@@ -346,369 +265,314 @@ namespace ScheduleBuilder
 
         #endregion
 
+        #region Event Tab
+
+        private void UpdateEvents()
+        {
+            EventLabel.Text = "Your tasks:";
+
+            EventDGV.Rows.Clear();
+            foreach(Backend.Event e in CurrentUser.Events)
+            {
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(EventDGV);
+
+                // color at same index of corresponding priority level
+                row.DefaultCellStyle.BackColor = Backend.Constants.PriorityColors[Backend.Constants.PriorityList.IndexOf(e.Priority)];
+
+                row.Cells[0].Value = e.StartDate.ToString();
+                row.Cells[1].Value = e.Subject;
+
+                EventDGV.Rows.Add(row);
+            }
+            EventDGV.Refresh();
+        }
+
+        private void EventDGV_DoubleClick(object sender, EventArgs e)
+        {
+            // get the subject string
+            string subject = EventDGV.SelectedRows[0].Cells[1].Value.ToString();
+
+            // search for the currentuser's event with that subject
+            var match = CurrentUser.Events.Where(ev => ev.Subject == subject).FirstOrDefault();
+
+            // there was no match found
+            if (match == null)
+                return;
+
+            ViewerForm v = new ViewerForm(this, match);
+            v.Show();
+
+        }
+
+        #endregion
+
+        #region Day Tab
+
+        private void UpdateDay()
+        {
+            DayLabel.Text = Time.Value.DayOfWeek.ToString() + " " + Time.Value.Date.ToString("MM/dd/yyyy");
+
+            DayDGV.Rows.Clear();
+
+            // iterate through the hours of the day
+            DateTime startHour = new DateTime(Time.Value.Year, Time.Value.Month, Time.Value.Day, 0, 0, 0, DateTimeKind.Local);
+            DateTime endHour = startHour.AddDays(1);
+
+            // get all events which need to happen at this day
+            List<Backend.Event> events = CurrentUser.GetRepeatingEvents(Time.Value);
+
+            while (startHour.Date != endHour.Date)
+            {
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(DayDGV);
+                row.Cells[0].Value = startHour.ToString("hh:mm tt");
+
+                // get the first event at the current hour
+                var e = events.Where(current => current.StartDate.Hour == startHour.Hour).ToList().FirstOrDefault();
+
+                // there was a value, add it to the row
+                if(e != null)
+                {
+                    row.Cells[1].Value = e.Subject;
+
+                    // color at same index of corresponding priority level
+                    row.DefaultCellStyle.BackColor = Backend.Constants.PriorityColors[Backend.Constants.PriorityList.IndexOf(e.Priority)];
+                }
+
+                DayDGV.Rows.Add(row);
+                startHour = startHour.AddHours(1);
+            }
+            
+            DayDGV.Refresh();
+        }
+
+        private void DayDGV_DoubleClick(object sender, EventArgs e)
+        {
+            // there is no value in the cell
+            if (DayDGV.SelectedRows[0].Cells[1].Value == null)
+                return;
+
+            // get the subject string
+            string subject = DayDGV.SelectedRows[0].Cells[1].Value.ToString();
+
+            // search for the currentuser's event with that subject
+            var match = CurrentUser.Events.Where(ev => ev.Subject == subject).FirstOrDefault();
+
+            // there was no match found
+            if (match == null)
+                return;
+
+            ViewerForm v = new ViewerForm(this, match);
+            v.Show();
+        }
+
+        private void DayNextButton_Click(object sender, EventArgs e)
+        {
+            Time.Value = Time.Value.AddDays(1);
+            UpdateInterface();
+        }
+
+        private void DayPrevButton_Click(object sender, EventArgs e)
+        {
+            Time.Value = Time.Value.AddDays(-1);
+            UpdateInterface();
+        }
+
+        #endregion
+
         #region Week Tab
 
-        // Daniel1: Made minor changes to everything, just paste entire week section over...
-        // Daniel Added WeekPrevButton Click Handler Function
-        private void WeekPrevButton_Click(object sender, EventArgs e)
+        private void UpdateWeek()
         {
-            //weekTemp = weekTemp.AddDays(-7);
-            DayDateTimePicker.Value = DayDateTimePicker.Value.AddDays(-7);
-            UpdateInterface();
-        }
+            bool updateHeader = true;
+            string builder = string.Empty;
 
-        // Daniel Added WeekNextButton Click Handler Function
-        private void WeekNextButton_Click(object sender, EventArgs e)
-        {
-            //weekTemp = weekTemp.AddDays(7);
-            DayDateTimePicker.Value = DayDateTimePicker.Value.AddDays(7);
-            UpdateInterface();
-        }
-
-        // Daniel1 Added column click DayDateTimePicker change
-        private void WeekDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int dow = Convert.ToInt32(DayDateTimePicker.Value.DayOfWeek);
-            // Beginning of Week DateTime
-            DateTime bow = new DateTime();
-            bow = DayDateTimePicker.Value.AddDays(-1 * dow);
-            int c = WeekDGV.SelectedCells[0].ColumnIndex;
-
-            // Change DayDateTimePicker value
-            DayDateTimePicker.Value = bow.AddDays(c - 1);
-
-            // Highlight Selected Column
-            //for (int r = 0; r < 24; r++)
-            //{
-            //    WeekDGV.Rows[r].Cells[c].Style.BackColor = Color.LightBlue;
-            //}
-
-            // try this?
-            //WeekDGV.Columns[c].Selected = true;
-
-            // Fill Cells
-            //foreach (Backend.Event item in CurrentUser.Events)
-            //{
-            //    FillWeekCell((int)item.StartTime.Hour, item);
-            //}
-
-        }
-
-        // Daniel Created FillWeekDGV
-        public void FillWeekDGV(ref DataGridView WeekDGV)
-        {
-            int dow = Convert.ToInt32(DayDateTimePicker.Value.DayOfWeek);
-            // End of Week DateTime
-            DateTime eow = new DateTime();
-            eow = DayDateTimePicker.Value.AddDays(6 - dow);
-            // Beginning of Week DateTime
-            DateTime bow = new DateTime();
-            bow = DayDateTimePicker.Value.AddDays(-1 * dow);
-
-            // Clear Rows
             WeekDGV.Rows.Clear();
 
-            // Daniel1 Update Day Number on columns
-            WeekDGV.Columns[1].HeaderText = "Sunday " + bow.AddDays(0).Day;
-            WeekDGV.Columns[2].HeaderText = "Monday " + bow.AddDays(1).Day;
-            WeekDGV.Columns[3].HeaderText = "Tuesday " + bow.AddDays(2).Day;
-            WeekDGV.Columns[4].HeaderText = "Wednesday " + bow.AddDays(3).Day;
-            WeekDGV.Columns[5].HeaderText = "Thursday " + bow.AddDays(4).Day;
-            WeekDGV.Columns[6].HeaderText = "Friday " + bow.AddDays(5).Day;
-            WeekDGV.Columns[7].HeaderText = "Saturday " + bow.AddDays(6).Day;
+            // iterate through the hours of the day starting from the first day of the week
+            DateTime startHour = new DateTime(Time.Value.Year, Time.Value.Month, Time.Value.Day, 0, 0, 0, DateTimeKind.Local);
+            while (startHour.DayOfWeek != 0)
+                startHour = startHour.AddDays(-1);
 
-            // Update Grid
-            for (int i = 0; i < 24; i++)
+            DateTime endHour = startHour.AddDays(1);
+
+            builder += $"{startHour.ToString("MMMM")} {startHour.Day}";
+            builder += $" to {startHour.ToString("MMMM")} {startHour.AddDays(7).Day}";
+            WeekLabel.Text = builder;
+
+            // get all events which need to happen at this day
+            List<Backend.Event> events;
+
+            // iterate through each hour in the week in order
+            while (startHour.Date != endHour.Date)
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(WeekDGV);
-                row.Cells[0].Value = new DateTime(DayDateTimePicker.Value.Year, DayDateTimePicker.Value.Month, DayDateTimePicker.Value.Day, i, 0, 0).ToString("hh:mm tt");
+                row.Cells[0].Value = startHour.ToString("hh:mm tt");
+
+                // iterate through all days of the week one row at a time
+                for(int i = 0; i < 7; i++)
+                {
+                    events = CurrentUser.GetRepeatingEvents(startHour.AddDays(i));
+
+                    // get the first event at the current hour for each day
+                    var e = events.Where(current => current.StartDate.Hour == startHour.AddDays(i).Hour).ToList().FirstOrDefault();
+
+                    // there was a value, add it to the row
+                    if (e != null)
+                    {
+                        // don't fill the time column with events
+                        row.Cells[1 + i].Value = e.Subject;
+
+                        // color at same index of corresponding priority level
+                        row.Cells[1 + i].Style.BackColor = Backend.Constants.PriorityColors[Backend.Constants.PriorityList.IndexOf(e.Priority)];
+                    }
+
+                    // update the column header for each column once
+                    if(updateHeader == true)
+                    {
+                        WeekDGV.Columns[1 + i].HeaderText = startHour.AddDays(i).DayOfWeek.ToString() + " " + startHour.AddDays(i).Day;
+                    }
+                }
+                // stop updating the headers, they have been filled
+                updateHeader = false;
+
                 WeekDGV.Rows.Add(row);
+                startHour = startHour.AddHours(1);
             }
 
-            // Add Week Label Text            
-            WeekLabel.Text = "Week of "
-                + DayDateTimePicker.Value.AddDays(-1 * dow).ToShortDateString()
-                + " through "
-                + DayDateTimePicker.Value.AddDays(6 - dow).ToShortDateString();
-
-            // Fill Cells
-            foreach (Backend.Event item in CurrentUser.Events)
-            {
-                FillWeekCell((int)item.StartTime.Hour, item);
-            }
+            WeekDGV.Refresh();
         }
 
-        // Daniel Added Sub-function for adding the specific week cell.
-        public void FillWeekCell(int time, Backend.Event item)
+        private void WeekDGV_DoubleClick(object sender, EventArgs e)
         {
-            int dow = Convert.ToInt32(DayDateTimePicker.Value.DayOfWeek);
-            // End of Week DateTime
-            DateTime eow = new DateTime();
-            eow = DayDateTimePicker.Value.AddDays(6 - dow);
-            // Beginning of Week DateTime
-            DateTime bow = new DateTime();
-            bow = DayDateTimePicker.Value.AddDays(-1 * dow);
+            // the time of day was double clicked or there is nothing in the cell
+            if (WeekDGV.SelectedCells[0].ColumnIndex == 0 || WeekDGV.SelectedCells[0].Value == null)
+                return;
 
-            // CompareTo for DateTime returns less than 0 if earlier than, 0 when equal, and greater than 0 when later than.
-            // This if statement ensures that the event falls on the selected calendar week. 
-            if (item.StartDate.CompareTo(eow) <= 0 && item.StartDate.CompareTo(bow) >= 0)
-            {
-                int k = (int)item.StartDate.DayOfWeek + 1;
-                string priority = item.Priority;
-                WeekDGV.Rows[time].Cells[k].Value = item.Subject.ToString();
+            // get the subject string
+            string subject = WeekDGV.SelectedCells[0].Value.ToString();
 
-                switch (priority)
-                {
-                    case "Low":
-                        WeekDGV.Rows[time].Cells[k].Style.BackColor = Backend.Constants.LOW_PRIORITY;
-                        break;
-                    case "Medium":
-                        WeekDGV.Rows[time].Cells[k].Style.BackColor = Backend.Constants.MED_PRIORITY;
-                        break;
-                    case "High":
-                        WeekDGV.Rows[time].Cells[k].Style.BackColor = Backend.Constants.HIGH_PRIORITY;
-                        break;
-                }
+            // search for the currentuser's event with that subject
+            var match = CurrentUser.Events.Where(ev => ev.Subject == subject).FirstOrDefault();
 
+            // there was no match found
+            if (match == null)
+                return;
 
-                // +1 for the Time Column Offset
-            }
+            ViewerForm v = new ViewerForm(this, match);
+            v.Show();
+        }
 
-
+        private void WeekPrevButton_Click(object sender, EventArgs e)
+        {
+            Time.Value = Time.Value.AddDays(-7);
+            UpdateInterface();
+        }
+        
+        private void WeekNextButton_Click(object sender, EventArgs e)
+        {
+            Time.Value = Time.Value.AddDays(7);
+            UpdateInterface();
         }
 
         #endregion
 
         #region Month Tab
 
-        // MADE BY DAVID
-        private void MonthPrevButton_Click(object sender, EventArgs e)
-        {
-            //updates the monthlabel
-            int nowmonth = DayDateTimePicker.Value.Month;
-            if (nowmonth == 1)
-            {
-                nowmonth = 12;
-                DayDateTimePicker.Value = new DateTime(DayDateTimePicker.Value.Year, nowmonth, DayDateTimePicker.Value.Day);
-                DayDateTimePicker.Value = new DateTime(DayDateTimePicker.Value.Year - 1, nowmonth, DayDateTimePicker.Value.Day);
-            }
-            else
-            {
-                nowmonth--;
-                DayDateTimePicker.Value = new DateTime(DayDateTimePicker.Value.Year, nowmonth, DayDateTimePicker.Value.Day);
-            }
-            MonthLabelUpdate(nowmonth);
-            LoadMonthDGV();
-        }
-        // MADE BY DAVID
-        private void MonthNextButton_Click(object sender, EventArgs e)
-        {
-            //updates the monthlabel
-            int nowmonth = DayDateTimePicker.Value.Month;
-            if (nowmonth == 12)
-            {
-                nowmonth = 1;
-                DayDateTimePicker.Value = new DateTime(DayDateTimePicker.Value.Year, nowmonth, DayDateTimePicker.Value.Day);
-                DayDateTimePicker.Value = new DateTime(DayDateTimePicker.Value.Year + 1, nowmonth, DayDateTimePicker.Value.Day);
-            }
-            else
-            {
-                nowmonth++;
-                DayDateTimePicker.Value = new DateTime(DayDateTimePicker.Value.Year, nowmonth, DayDateTimePicker.Value.Day);
-            }
-            MonthLabelUpdate(nowmonth);
-            LoadMonthDGV();
-        }
-        // MADE BY DAVID
-        private string MonthLabelUpdate(int month)
-        {
-            string monthviewer = "Insert Date Here";
-            switch (month)
-            {
-                case 1:
-                    monthviewer = "January"; break;
-                case 2:
-                    monthviewer = "February"; break;
-                case 3:
-                    monthviewer = "March"; break;
-                case 4:
-                    monthviewer = "April"; break;
-                case 5:
-                    monthviewer = "May"; break;
-                case 6:
-                    monthviewer = "June"; break;
-                case 7:
-                    monthviewer = "July"; break;
-                case 8:
-                    monthviewer = "August"; break;
-                case 9:
-                    monthviewer = "September"; break;
-                case 10:
-                    monthviewer = "October"; break;
-                case 11:
-                    monthviewer = "November"; break;
-                case 12:
-                    monthviewer = "December"; break;
-                default:
-                    monthviewer = "MonthLabel is BROKEN";
-                    break;
-            }
-            MonthLabel.Text = monthviewer;
-            return monthviewer;
-        }
-        // MADE BY DAVID
-        private void LoadMonthCell()
-        {
-            for (int k = 0; k < 7; k++)
-                MonthDGV.Rows.Add();
-        }
-        // MADE BY DAVID
-        private void ResetMonthDGV()
+        private void UpdateMonth()
         {
             MonthDGV.Rows.Clear();
-        }
-        // MADE BY DAVID
-        private void LoadMonthDGV()
-        {
-            ResetMonthDGV();
-            LoadMonthCell();
-            //select the beginning of the month to have an easier load
-            DateTime loadDay = new DateTime(DayDateTimePicker.Value.Year, DayDateTimePicker.Value.Month, 1);
-            int currentMonth = DayDateTimePicker.Value.Month;
-            int weekTracker = 0;
-            int dayTracker = (int)loadDay.DayOfWeek;
 
+            MonthLabel.Text = Time.Value.ToString("MMMM");
 
-            if (currentMonth == 1 || currentMonth == 3 || currentMonth == 5 || currentMonth == 7 || currentMonth == 8 || currentMonth == 10 || currentMonth == 12) // Month's with 31 days
-                for (int i = 0; i < 31; i++)
-                {
+            // find the number of days
+            int count = 0;
+            int days = DateTime.DaysInMonth(Time.Value.Year, Time.Value.Month);
 
-                    DayPlacer(dayTracker, weekTracker, i + 1, loadDay);
+            DateTime date = new DateTime(Time.Value.Year, Time.Value.Month, 1, 0, 0, 0, DateTimeKind.Local);
 
+            // get the first even shown on this day
+            Backend.Event e;
 
-                    if (dayTracker == 6)
-                    {
-                        dayTracker = 0;
-                        weekTracker++;
-                    }
-                    else
-                        dayTracker++;
-                    loadDay = new DateTime(DayDateTimePicker.Value.Year, DayDateTimePicker.Value.Month, i + 1);
-                }
-            else if (currentMonth != 2)
-                for (int j = 0; j < 30; j++)
-                {
-                    DayPlacer(dayTracker, weekTracker, j + 1, loadDay);
-
-                    if (dayTracker == 6)
-                    {
-                        dayTracker = 0;
-                        weekTracker++;
-                    }
-                    else
-                        dayTracker++;
-                }
-            else if (DateTime.IsLeapYear(DayDateTimePicker.Value.Year))
-                for (int k = 0; k < 29; k++)
-                {
-                    DayPlacer(dayTracker, weekTracker, k + 1, loadDay);
-
-                    if (dayTracker == 6)
-                    {
-                        dayTracker = 0;
-                        weekTracker++;
-                    }
-                    else
-                        dayTracker++;
-                }
-            else
-                for (int l = 0; l < 28; l++)
-                {
-                    DayPlacer(dayTracker, weekTracker, l + 1, loadDay);
-
-                    if (dayTracker == 6)
-                    {
-                        dayTracker = 0;
-                        weekTracker++;
-                    }
-                    else
-                        dayTracker++;
-                }
-
-
-        }
-
-        // MADE BY DAVID
-        private void DayPlacer(int d, int w, int c, DateTime e)
-        {
-            switch (d)
+            // start adding days until all are put in
+            while(count < days)
             {
-                case 0://Sunday
-                    MonthDGV[0, w].Value = c;
-                    break;
-                case 1: // Monday
-                    MonthDGV[1, w].Value = c;
-                    break;
-                case 2: // Tuesday
-                    MonthDGV[2, w].Value = c;
-                    break;
-                case 3: //Wednesday
-                    MonthDGV[3, w].Value = c;
-                    break;
-                case 4: // Thursday
-                    MonthDGV[4, w].Value = c;
-                    break;
-                case 5: //Friday
-                    MonthDGV[5, w].Value = c;
-                    break;
-                case 6: //Saturday
-                    MonthDGV[6, w].Value = c;
-                    break;
-                default:
-                    Console.WriteLine("DAYOFWEEK DOES NOT EXIST");
-                    break;
-            }
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(MonthDGV);
 
-            foreach (Backend.Event item in CurrentUser.Events)
-            {
-                if (item.StartDate.Month == e.Date.Month && item.StartDate.Year == e.Date.Year && item.StartDate.Day == e.Date.Day)
-                    switch (d)
+                // loop for each week or until the amount of days in the month is hit
+                for (int i = (int)date.AddDays(count).DayOfWeek; i < 7; i++, count++)
+                {
+                    // the end of the month was reached
+                    if (count >= days)
+                        break;
+
+                    // put the day of the month in the cell
+                    row.Cells[(int)date.AddDays(count).DayOfWeek].Value = date.AddDays(count).Day;
+
+                    // if there is an event for today
+                    if (CurrentUser.GetRepeatingEvents(date.AddDays(count)).Count > 0)
                     {
-                        case 0://Sunday
-                            MonthDGV[0, w].Value += "  " + item.Subject.ToString();
-                            break;
-                        case 1: // Monday
-                            MonthDGV[1, w].Value += "  " + item.Subject.ToString();
-                            break;
-                        case 2: // Tuesday
-                            MonthDGV[2, w].Value += "  " + item.Subject.ToString();
-                            break;
-                        case 3: //Wednesday
-                            MonthDGV[3, w].Value += "  " + item.Subject.ToString();
-                            break;
-                        case 4: // Thursday
-                            MonthDGV[4, w].Value += "  " + item.Subject.ToString();
-                            break;
-                        case 5: //Friday
-                            MonthDGV[5, w].Value += "  " + item.Subject.ToString();
-                            break;
-                        case 6: //Saturday
-                            MonthDGV[6, w].Value += "  " + item.Subject.ToString();
-                            break;
-                        default:
-                            Console.WriteLine("DAYOFWEEK DOES NOT EXIST");
-                            break;
+                        // get all the CurrentUser's events that can occur on this day
+                        e = CurrentUser.GetRepeatingEvents(date.AddDays(count))[0];
+
+                        // add the event subject next to the day of the month
+                        row.Cells[(int)date.AddDays(count).DayOfWeek].Value += $" {e.Subject}";
+
+                        // color based on priority
+                        row.Cells[(int)date.AddDays(count).DayOfWeek].Style.BackColor
+                            = Backend.Constants.PriorityColors[Backend.Constants.PriorityList.IndexOf(e.Priority)];
                     }
+                }
+                MonthDGV.Rows.Add(row);
             }
+            MonthDGV.Refresh();
+
         }
+
+        private void MonthDGV_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            MonthDGV.Rows[e.RowIndex].Height = Backend.Constants.MonthHeight;
+        }
+
+        private void MonthDGV_DoubleClick(object sender, EventArgs e)
+        {
+            // the time of day was double clicked or there is nothing in the cell
+            if (MonthDGV.SelectedCells[0].ColumnIndex == 0 || MonthDGV.SelectedCells[0].Value == null)
+                return;
+
+            // get the subject string
+            string subject = MonthDGV.SelectedCells[0].Value.ToString();
+            subject = subject.Substring(subject.IndexOf(' ') + 1);
+
+            // search for the currentuser's event with that subject
+            var match = CurrentUser.Events.Where(ev => ev.Subject == subject).FirstOrDefault();
+
+            // there was no match found
+            if (match == null)
+                return;
+
+            ViewerForm v = new ViewerForm(this, match);
+            v.Show();
+        }
+
+        private void MonthNextButton_Click(object sender, EventArgs e)
+        {
+            Time.Value = Time.Value.AddMonths(1);
+            UpdateInterface();
+        }
+        
+        private void MonthPrevButton_Click(object sender, EventArgs e)
+        {
+            Time.Value = Time.Value.AddMonths(-1);
+            UpdateInterface();
+        }
+
 
         #endregion
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ViewerForm f = new ViewerForm(this, CurrentUser.Events[0]);
-            f.Show();
-        }
+
     }
 }

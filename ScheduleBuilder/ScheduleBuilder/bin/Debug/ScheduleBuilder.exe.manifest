@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ScheduleBuilder.exe" size="58848">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ScheduleBuilder.exe" size="71136">
       <assemblyIdentity name="ScheduleBuilder" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>yBDSgC45fUZi7xdER+vrUhnynEc/wWu/UFTBCxE8bWI=</dsig:DigestValue>
+        <dsig:DigestValue>OnC+BnQ8LuezKVHDdKeJSzTDJSVejnjOamS3jKJwb+E=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

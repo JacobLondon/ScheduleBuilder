@@ -44,7 +44,7 @@ namespace ScheduleBuilder.Backend
 
                 // the event does not repeat
                 if (e.EventRepeats == false)
-                    break;
+                    continue;
 
                 // repeats daily, so always put in for the day
                 if (e.RepeatOccurence == Constants.RepeatList[(int)Constants.RepeatOccurence.Daily])

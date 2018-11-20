@@ -77,5 +77,9 @@ namespace ScheduleBuilder
             Close();
         }
 
+        private void StartDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            FinishDateTimePicker.Value = StartDateTimePicker.Value;
+        }
     }
 }

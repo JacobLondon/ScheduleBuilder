@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EventForm));
             this.FinishDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.SubjectLabel = new System.Windows.Forms.Label();
             this.StartLabel = new System.Windows.Forms.Label();
@@ -160,6 +161,7 @@
             this.StartDateTimePicker.Name = "StartDateTimePicker";
             this.StartDateTimePicker.Size = new System.Drawing.Size(262, 22);
             this.StartDateTimePicker.TabIndex = 16;
+            this.StartDateTimePicker.ValueChanged += new System.EventHandler(this.StartDateTimePicker_ValueChanged);
             // 
             // RepeatCheckBox
             // 
@@ -258,6 +260,7 @@
             this.Controls.Add(this.StartLabel);
             this.Controls.Add(this.SubjectLabel);
             this.Controls.Add(this.FinishDateTimePicker);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EventForm";
             this.Text = "Event Builder";
             this.Load += new System.EventHandler(this.EventForm_Load);

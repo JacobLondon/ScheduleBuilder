@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.AddUserTextBox = new System.Windows.Forms.TextBox();
             this.UserLabel = new System.Windows.Forms.Label();
-            this.DayDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.Time = new System.Windows.Forms.DateTimePicker();
             this.EventDGV = new System.Windows.Forms.DataGridView();
             this.TimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EventColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,6 +46,8 @@
             this.EventTabPage = new System.Windows.Forms.TabPage();
             this.EventLabel = new System.Windows.Forms.Label();
             this.DayTabPage = new System.Windows.Forms.TabPage();
+            this.DayNextButton = new System.Windows.Forms.Button();
+            this.DayPrevButton = new System.Windows.Forms.Button();
             this.DayLabel = new System.Windows.Forms.Label();
             this.DayDGV = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,7 +77,6 @@
             this.MonthLabel = new System.Windows.Forms.Label();
             this.MonthNextButton = new System.Windows.Forms.Button();
             this.MonthPrevButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.EventDGV)).BeginInit();
             this.UserGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UserDGV)).BeginInit();
@@ -104,16 +105,16 @@
             this.UserLabel.Location = new System.Drawing.Point(1, 9);
             this.UserLabel.Name = "UserLabel";
             this.UserLabel.Size = new System.Drawing.Size(82, 16);
-            this.UserLabel.TabIndex = 1;
+            this.UserLabel.TabIndex = 0;
             this.UserLabel.Text = "Current User";
             // 
-            // DayDateTimePicker
+            // Time
             // 
-            this.DayDateTimePicker.Location = new System.Drawing.Point(522, 9);
-            this.DayDateTimePicker.Name = "DayDateTimePicker";
-            this.DayDateTimePicker.Size = new System.Drawing.Size(197, 20);
-            this.DayDateTimePicker.TabIndex = 1;
-            this.DayDateTimePicker.ValueChanged += new System.EventHandler(this.DayDateTimePicker_ValueChanged);
+            this.Time.Location = new System.Drawing.Point(522, 9);
+            this.Time.Name = "Time";
+            this.Time.Size = new System.Drawing.Size(197, 20);
+            this.Time.TabIndex = 3;
+            this.Time.ValueChanged += new System.EventHandler(this.DayDateTimePicker_ValueChanged);
             // 
             // EventDGV
             // 
@@ -131,7 +132,7 @@
             this.EventDGV.RowHeadersVisible = false;
             this.EventDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.EventDGV.Size = new System.Drawing.Size(824, 484);
-            this.EventDGV.TabIndex = 0;
+            this.EventDGV.TabIndex = 1;
             // 
             // TimeColumn
             // 
@@ -139,6 +140,7 @@
             this.TimeColumn.Name = "TimeColumn";
             this.TimeColumn.ReadOnly = true;
             this.TimeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.TimeColumn.Width = 250;
             // 
             // EventColumn
             // 
@@ -146,7 +148,7 @@
             this.EventColumn.Name = "EventColumn";
             this.EventColumn.ReadOnly = true;
             this.EventColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.EventColumn.Width = 715;
+            this.EventColumn.Width = 565;
             // 
             // UserGroupBox
             // 
@@ -158,7 +160,7 @@
             this.UserGroupBox.Location = new System.Drawing.Point(4, 36);
             this.UserGroupBox.Name = "UserGroupBox";
             this.UserGroupBox.Size = new System.Drawing.Size(254, 557);
-            this.UserGroupBox.TabIndex = 1;
+            this.UserGroupBox.TabIndex = 4;
             this.UserGroupBox.TabStop = false;
             this.UserGroupBox.Text = "Manage Users";
             // 
@@ -214,8 +216,8 @@
             this.UserComboBox.Location = new System.Drawing.Point(100, 6);
             this.UserComboBox.Name = "UserComboBox";
             this.UserComboBox.Size = new System.Drawing.Size(242, 24);
-            this.UserComboBox.TabIndex = 4;
-            this.UserComboBox.SelectedIndexChanged += new System.EventHandler(this.UserComboBox_SelectedIndexChanged);
+            this.UserComboBox.TabIndex = 1;
+            this.UserComboBox.SelectedIndexChanged += new System.EventHandler(this.UserComboBox_SelectedChanged);
             // 
             // NewEventButton
             // 
@@ -223,7 +225,7 @@
             this.NewEventButton.Location = new System.Drawing.Point(348, 5);
             this.NewEventButton.Name = "NewEventButton";
             this.NewEventButton.Size = new System.Drawing.Size(168, 27);
-            this.NewEventButton.TabIndex = 5;
+            this.NewEventButton.TabIndex = 2;
             this.NewEventButton.Text = "Create New Event";
             this.NewEventButton.UseVisualStyleBackColor = true;
             this.NewEventButton.Click += new System.EventHandler(this.NewEventButton_Click);
@@ -238,7 +240,7 @@
             this.CalendarTabControl.Name = "CalendarTabControl";
             this.CalendarTabControl.SelectedIndex = 0;
             this.CalendarTabControl.Size = new System.Drawing.Size(844, 555);
-            this.CalendarTabControl.TabIndex = 3;
+            this.CalendarTabControl.TabIndex = 5;
             // 
             // EventTabPage
             // 
@@ -259,11 +261,13 @@
             this.EventLabel.Location = new System.Drawing.Point(321, 11);
             this.EventLabel.Name = "EventLabel";
             this.EventLabel.Size = new System.Drawing.Size(161, 16);
-            this.EventLabel.TabIndex = 11;
+            this.EventLabel.TabIndex = 0;
             this.EventLabel.Text = "date here change on load";
             // 
             // DayTabPage
             // 
+            this.DayTabPage.Controls.Add(this.DayNextButton);
+            this.DayTabPage.Controls.Add(this.DayPrevButton);
             this.DayTabPage.Controls.Add(this.DayLabel);
             this.DayTabPage.Controls.Add(this.DayDGV);
             this.DayTabPage.Location = new System.Drawing.Point(4, 22);
@@ -273,6 +277,26 @@
             this.DayTabPage.Text = "Day View";
             this.DayTabPage.UseVisualStyleBackColor = true;
             // 
+            // DayNextButton
+            // 
+            this.DayNextButton.Location = new System.Drawing.Point(723, 6);
+            this.DayNextButton.Name = "DayNextButton";
+            this.DayNextButton.Size = new System.Drawing.Size(107, 27);
+            this.DayNextButton.TabIndex = 2;
+            this.DayNextButton.Text = ">>>";
+            this.DayNextButton.UseVisualStyleBackColor = true;
+            this.DayNextButton.Click += new System.EventHandler(this.DayNextButton_Click);
+            // 
+            // DayPrevButton
+            // 
+            this.DayPrevButton.Location = new System.Drawing.Point(6, 6);
+            this.DayPrevButton.Name = "DayPrevButton";
+            this.DayPrevButton.Size = new System.Drawing.Size(107, 27);
+            this.DayPrevButton.TabIndex = 0;
+            this.DayPrevButton.Text = "<<<";
+            this.DayPrevButton.UseVisualStyleBackColor = true;
+            this.DayPrevButton.Click += new System.EventHandler(this.DayPrevButton_Click);
+            // 
             // DayLabel
             // 
             this.DayLabel.AutoSize = true;
@@ -280,7 +304,7 @@
             this.DayLabel.Location = new System.Drawing.Point(321, 11);
             this.DayLabel.Name = "DayLabel";
             this.DayLabel.Size = new System.Drawing.Size(161, 16);
-            this.DayLabel.TabIndex = 13;
+            this.DayLabel.TabIndex = 1;
             this.DayLabel.Text = "date here change on load";
             // 
             // DayDGV
@@ -299,7 +323,7 @@
             this.DayDGV.RowHeadersVisible = false;
             this.DayDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DayDGV.Size = new System.Drawing.Size(824, 484);
-            this.DayDGV.TabIndex = 12;
+            this.DayDGV.TabIndex = 3;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -335,6 +359,7 @@
             this.WeekDGV.AllowUserToAddRows = false;
             this.WeekDGV.AllowUserToDeleteRows = false;
             this.WeekDGV.AllowUserToResizeRows = false;
+            this.WeekDGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             this.WeekDGV.BackgroundColor = System.Drawing.Color.White;
             this.WeekDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.WeekDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -353,8 +378,7 @@
             this.WeekDGV.RowHeadersVisible = false;
             this.WeekDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.WeekDGV.Size = new System.Drawing.Size(824, 484);
-            this.WeekDGV.TabIndex = 11;
-            this.WeekDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.WeekDGV_CellContentClick);
+            this.WeekDGV.TabIndex = 3;
             // 
             // TimeWeekColumn
             // 
@@ -426,7 +450,7 @@
             this.WeekLabel.Location = new System.Drawing.Point(321, 11);
             this.WeekLabel.Name = "WeekLabel";
             this.WeekLabel.Size = new System.Drawing.Size(161, 16);
-            this.WeekLabel.TabIndex = 10;
+            this.WeekLabel.TabIndex = 1;
             this.WeekLabel.Text = "date here change on load";
             // 
             // WeekNextButton
@@ -434,7 +458,7 @@
             this.WeekNextButton.Location = new System.Drawing.Point(723, 6);
             this.WeekNextButton.Name = "WeekNextButton";
             this.WeekNextButton.Size = new System.Drawing.Size(107, 27);
-            this.WeekNextButton.TabIndex = 9;
+            this.WeekNextButton.TabIndex = 2;
             this.WeekNextButton.Text = ">>>";
             this.WeekNextButton.UseVisualStyleBackColor = true;
             this.WeekNextButton.Click += new System.EventHandler(this.WeekNextButton_Click);
@@ -444,7 +468,7 @@
             this.WeekPrevButton.Location = new System.Drawing.Point(6, 6);
             this.WeekPrevButton.Name = "WeekPrevButton";
             this.WeekPrevButton.Size = new System.Drawing.Size(107, 27);
-            this.WeekPrevButton.TabIndex = 8;
+            this.WeekPrevButton.TabIndex = 0;
             this.WeekPrevButton.Text = "<<<";
             this.WeekPrevButton.UseVisualStyleBackColor = true;
             this.WeekPrevButton.Click += new System.EventHandler(this.WeekPrevButton_Click);
@@ -484,7 +508,7 @@
             this.MonthDGV.RowHeadersVisible = false;
             this.MonthDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.MonthDGV.Size = new System.Drawing.Size(824, 484);
-            this.MonthDGV.TabIndex = 14;
+            this.MonthDGV.TabIndex = 3;
             // 
             // SundayMonthColumn
             // 
@@ -546,10 +570,10 @@
             // 
             this.MonthLabel.AutoSize = true;
             this.MonthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MonthLabel.Location = new System.Drawing.Point(321, 11);
+            this.MonthLabel.Location = new System.Drawing.Point(341, 11);
             this.MonthLabel.Name = "MonthLabel";
             this.MonthLabel.Size = new System.Drawing.Size(170, 16);
-            this.MonthLabel.TabIndex = 13;
+            this.MonthLabel.TabIndex = 1;
             this.MonthLabel.Text = "month here change on load";
             // 
             // MonthNextButton
@@ -557,7 +581,7 @@
             this.MonthNextButton.Location = new System.Drawing.Point(723, 6);
             this.MonthNextButton.Name = "MonthNextButton";
             this.MonthNextButton.Size = new System.Drawing.Size(107, 27);
-            this.MonthNextButton.TabIndex = 12;
+            this.MonthNextButton.TabIndex = 2;
             this.MonthNextButton.Text = ">>>";
             this.MonthNextButton.UseVisualStyleBackColor = true;
             this.MonthNextButton.Click += new System.EventHandler(this.MonthNextButton_Click);
@@ -567,29 +591,18 @@
             this.MonthPrevButton.Location = new System.Drawing.Point(6, 6);
             this.MonthPrevButton.Name = "MonthPrevButton";
             this.MonthPrevButton.Size = new System.Drawing.Size(107, 27);
-            this.MonthPrevButton.TabIndex = 11;
+            this.MonthPrevButton.TabIndex = 0;
             this.MonthPrevButton.Text = "<<<";
             this.MonthPrevButton.UseVisualStyleBackColor = true;
             this.MonthPrevButton.Click += new System.EventHandler(this.MonthPrevButton_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(978, 30);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "test event";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1107, 597);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.UserGroupBox);
-            this.Controls.Add(this.DayDateTimePicker);
+            this.Controls.Add(this.Time);
             this.Controls.Add(this.CalendarTabControl);
             this.Controls.Add(this.NewEventButton);
             this.Controls.Add(this.UserComboBox);
@@ -630,7 +643,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn UserNameColumn;
         private System.Windows.Forms.Button DeleteUserButton;
         private System.Windows.Forms.Button NewEventButton;
-        private System.Windows.Forms.DateTimePicker DayDateTimePicker;
+        private System.Windows.Forms.DateTimePicker Time;
         private System.Windows.Forms.DataGridView EventDGV;
         private System.Windows.Forms.TabControl CalendarTabControl;
         private System.Windows.Forms.TabPage EventTabPage;
@@ -667,7 +680,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SaturdayWeekColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn EventColumn;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button DayNextButton;
+        private System.Windows.Forms.Button DayPrevButton;
     }
 }
 
