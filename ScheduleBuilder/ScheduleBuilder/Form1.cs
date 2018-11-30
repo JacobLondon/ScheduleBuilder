@@ -398,7 +398,7 @@ namespace ScheduleBuilder
             DateTime endHour = startHour.AddDays(1);
 
             builder += $"{startHour.ToString("MMMM")} {startHour.Day}";
-            builder += $" to {startHour.ToString("MMMM")} {startHour.AddDays(7).Day}";
+            builder += $" to {startHour.AddDays(6).ToString("MMMM")} {startHour.AddDays(6).Day}";
             WeekLabel.Text = builder;
 
             // get all events which need to happen at this day
