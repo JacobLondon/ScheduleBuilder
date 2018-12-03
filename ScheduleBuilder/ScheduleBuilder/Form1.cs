@@ -529,7 +529,6 @@ namespace ScheduleBuilder
                 MonthDGV.Rows.Add(row);
             }
             MonthDGV.Refresh();
-
         }
 
         private void MonthDGV_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)

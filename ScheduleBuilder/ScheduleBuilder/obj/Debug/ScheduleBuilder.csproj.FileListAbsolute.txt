@@ -77,3 +77,19 @@ F:\Programs\C#\ECE 4318 Software Engineering\V2\ScheduleBuilder\ScheduleBuilder\
 F:\Programs\C#\ECE 4318 Software Engineering\V2\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\obj\Debug\ScheduleBuilder.application
 F:\Programs\C#\ECE 4318 Software Engineering\V2\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\obj\Debug\ScheduleBuilder.exe
 F:\Programs\C#\ECE 4318 Software Engineering\V2\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\obj\Debug\ScheduleBuilder.pdb
+C:\Users\Jacob\Documents\! Workspaces\C#\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\bin\Debug\ScheduleBuilder.exe.config
+C:\Users\Jacob\Documents\! Workspaces\C#\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\bin\Debug\ScheduleBuilder.exe.manifest
+C:\Users\Jacob\Documents\! Workspaces\C#\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\bin\Debug\ScheduleBuilder.application
+C:\Users\Jacob\Documents\! Workspaces\C#\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\bin\Debug\ScheduleBuilder.exe
+C:\Users\Jacob\Documents\! Workspaces\C#\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\bin\Debug\ScheduleBuilder.pdb
+C:\Users\Jacob\Documents\! Workspaces\C#\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\obj\Debug\ScheduleBuilder.csprojAssemblyReference.cache
+C:\Users\Jacob\Documents\! Workspaces\C#\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\obj\Debug\ScheduleBuilder.EventForm.resources
+C:\Users\Jacob\Documents\! Workspaces\C#\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\obj\Debug\ScheduleBuilder.Form1.resources
+C:\Users\Jacob\Documents\! Workspaces\C#\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\obj\Debug\ScheduleBuilder.Properties.Resources.resources
+C:\Users\Jacob\Documents\! Workspaces\C#\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\obj\Debug\ScheduleBuilder.ViewerForm.resources
+C:\Users\Jacob\Documents\! Workspaces\C#\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\obj\Debug\ScheduleBuilder.csproj.GenerateResource.cache
+C:\Users\Jacob\Documents\! Workspaces\C#\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\obj\Debug\ScheduleBuilder.csproj.CoreCompileInputs.cache
+C:\Users\Jacob\Documents\! Workspaces\C#\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\obj\Debug\ScheduleBuilder.exe.manifest
+C:\Users\Jacob\Documents\! Workspaces\C#\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\obj\Debug\ScheduleBuilder.application
+C:\Users\Jacob\Documents\! Workspaces\C#\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\obj\Debug\ScheduleBuilder.exe
+C:\Users\Jacob\Documents\! Workspaces\C#\ScheduleBuilder\ScheduleBuilder\ScheduleBuilder\obj\Debug\ScheduleBuilder.pdb
